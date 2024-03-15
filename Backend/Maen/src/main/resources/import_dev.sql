@@ -1,0 +1,33 @@
+INSERT INTO Usuario (id, username, password, email, name, account_non_expired, account_non_locked, credentials_non_expired, enabled, created_at, last_password_change_at) VALUES ('c62db400-22e3-4e92-94db-1447f5688f2c', 'admin', '{bcrypt}$2a$10$4zcpWiElBDO8KELG3JE37ukgcCVfrdYeDd2i.F3MEioTkHFIfcqfK', 'admin@admin.com', 'admin',  true, true, true, true, current_timestamp, current_timestamp);
+INSERT INTO Usuario (id, username, password, email, name, account_non_expired, account_non_locked, credentials_non_expired, enabled, created_at, last_password_change_at) VALUES ('04d0595e-45d5-4f63-8b53-1d79e9d84a5d', 'pepeillo', '{bcrypt}$2a$12$h/1BSAC6wao.6.b.riMJXu58b/uSjU/EJ5mEfM7hoQP9RIm5VhOqu', 'pepeillo@user.com', 'pepeillo', true, true, true, true, current_timestamp, current_timestamp);
+INSERT INTO Usuario (id, username, password, email, name, account_non_expired, account_non_locked, credentials_non_expired, enabled, created_at, last_password_change_at) VALUES ('e010f144-b376-4dbb-933d-b3ec8332ed0d', 'user2', '{bcrypt}$2a$12$h/1BSAC6wao.6.b.riMJXu58b/uSjU/EJ5mEfM7hoQP9RIm5VhOqu', 'user2@user.com', 'User 2', true, true, true, true, current_timestamp, current_timestamp);
+INSERT INTO Usuario (id, username, password, email, name, account_non_expired, account_non_locked, credentials_non_expired, enabled, created_at, last_password_change_at) VALUES ('5cf8b808-3b6e-4d9d-90d5-65c83b0e75b2', 'user3', '{bcrypt}$2a$12$h/1BSAC6wao.6.b.riMJXu58b/uSjU/EJ5mEfM7hoQP9RIm5VhOqu', 'user3@user.com', 'User 3', true, true, true, true, current_timestamp, current_timestamp);
+
+INSERT INTO Usuario_maen (id, salary, num_members_of_family) VALUES ('04d0595e-45d5-4f63-8b53-1d79e9d84a5d', 3200.00, 8);
+INSERT INTO Usuario_maen (id, salary, num_members_of_family) VALUES ('e010f144-b376-4dbb-933d-b3ec8332ed0d', 2000.00, 4);
+INSERT INTO Usuario_maen (id, salary, num_members_of_family) VALUES ('5cf8b808-3b6e-4d9d-90d5-65c83b0e75b2', 4200.00, 2);
+
+INSERT INTO Worker (id, is_boss) VALUES ('c62db400-22e3-4e92-94db-1447f5688f2c', false);
+
+INSERT INTO Super_market (id, name, logotype) VALUES ('5a810d7a-a62d-42a4-830c-905c78f1ce53', 'Mercadona', 'https://barcelonamaculafound.org/wp-content/uploads/2019/12/mercadona.png');
+INSERT INTO Super_market (id, name, logotype) VALUES ('560cb288-b039-464d-89f5-631a6794e5f1', 'Carrefour', 'https://static.carrefour.es/crs/cdn_static/c4corp-front/images/logos/og/logo-carrefour-og_3.jpg');
+INSERT INTO Super_market (id, name, logotype) VALUES ('938bbee7-c02d-4eff-b7fb-65de157e2e0c', 'MAS', 'https://blog.supermercadosmas.com/wp-content/uploads/2018/01/blog-prueba23.jpg');
+INSERT INTO Super_market (id, name, logotype) VALUES ('698677de-ce3f-4a5e-9c90-c3b1ce2d1e97', 'ALDI', 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/ALDI_Nord_Logo_2015.png/731px-ALDI_Nord_Logo_2015.png');
+INSERT INTO Super_market (id, name, logotype) VALUES ('64c55bc0-9b75-46ae-b299-2cb7f8d1554f', 'Cash Fresh', 'https://www.cashfresh.es/wp-content/uploads/2020/02/CASH-FRESH.jpg');
+
+INSERT INTO Product(id, name, image, brand, price, price_kg, taxes, category, superMarket_id) VALUES ('ba9f2f92-5c4d-49ce-8f01-ee073447bfb8', 'tomato', 'https://prod-mercadona.imgix.net/images/d9b74d242c05f180baf1f2af25255867.jpg', 'hacendado', 1.03, 1.40, 21, 0, '5a810d7a-a62d-42a4-830c-905c78f1ce53');
+INSERT INTO Product(id, name, image, brand, price, price_kg, taxes, category, superMarket_id) VALUES ('995e94d3-c39e-4422-9ae6-ff11aaab8ab2', 'tomato', 'https://a0.soysuper.com/4f8b1a659801347bd2c1b8bd469910f1.1500.0.0.0.wmark.9d3c4d01.jpg', 'classic', 1.01, 1.40, 21, 0, '560cb288-b039-464d-89f5-631a6794e5f1');
+INSERT INTO Product(id, name, image, brand, price, price_kg, taxes, category, superMarket_id) VALUES ('da98fe64-3c82-4758-bc3d-1dc183fb2a7b', 'tomato', 'https://www.dia.es/product_images/10677/10677_ISO_0_ES.jpg', 'vegecampo', 1.40, 1.67, 21, 0, '938bbee7-c02d-4eff-b7fb-65de157e2e0c');
+INSERT INTO Product(id, name, image, brand, price, price_kg, taxes, category, superMarket_id) VALUES ('0b238cc4-e9b7-4b3a-8da0-822cd3dfe40d', 'tomato', 'https://www.lidl.es/media/product/0/0/1/4/7/8/3/tomate-frito-con-cebolla-zoom--2.jpg', 'freshona', 1.23, 1.30,21, 0, '698677de-ce3f-4a5e-9c90-c3b1ce2d1e97');
+INSERT INTO Product(id, name, image, brand, price, price_kg, taxes, category, superMarket_id) VALUES ('fc1e37eb-2db4-456d-9d9d-8645bd14d626', 'tomato', 'https://www.auchan.pt/dw/image/v2/BFRC_PRD/on/demandware.static/-/Sites-auchan-pt-master-catalog/default/dw0678a7a4/images/hi-res/002474035.jpg', 'auchan', 0.90, 1.10, 21, 0, '64c55bc0-9b75-46ae-b299-2cb7f8d1554f');
+INSERT INTO Product(id, name, image, brand, price, price_kg, taxes, category, superMarket_id) VALUES ('448bde02-d045-4d47-a912-40123f2665ad', 'tomato', 'https://www.clara.es/medio/2021/02/22/tomate-frito-ferrer_477a097f_1000x1500.jpg', 'ferrer', 1.60, 1.50, 21, 0, '5a810d7a-a62d-42a4-830c-905c78f1ce53');
+
+INSERT INTO ligth_company(id, name, logotype) VALUES('d92057c4-ac58-4738-99e1-2e05e1596308', 'TotalEnergy', 'https://brandemia.org/contenido/subidas/2021/05/portada-total-imagenes-brandemia-web-1000x670.jpg');
+INSERT INTO ligth_company(id, name, logotype) VALUES('94f4f1b0-fb02-4f2a-bf00-e0e751843028', 'Iberdrola', 'https://elperiodicodelaenergia.com/wp-content/uploads/2023/05/fotonoticia_20230524105438_1920.jpg');
+INSERT INTO ligth_company(id, name, logotype) VALUES('4b08d856-f464-4bef-ad8d-a92186f1b237', 'Endesa', 'https://www.endesa.com/content/dam/endesa-com/home/prensa/imagenes/kit-de-prensa/endesa-logo-prensa.jpg');
+INSERT INTO ligth_company(id, name, logotype) VALUES('8a28b5f0-c23f-451b-97f1-ad6bb190eff7', 'Naturgy', 'https://ieeb.fundacion-biodiversidad.es/sites/default/files/naturgy_rgb_principal_positiva_0.jpg');
+
+INSERT INTO electricity_contract (id, price_energy, discount_energy, price_power, price_equipment, taxes, company_id) VALUES ('4dd03371-7871-4f12-9555-e797c3d6e8fc', 0.26, 5, 0.13, 1.76, 21, 'd92057c4-ac58-4738-99e1-2e05e1596308' );
+INSERT INTO electricity_contract (id, price_energy, discount_energy, price_power, price_equipment, taxes, company_id) VALUES ('1efb96ec-c006-4ce7-abf9-c0bd4d761a47', 0.27, 4, 0.14, 1.56, 21, '94f4f1b0-fb02-4f2a-bf00-e0e751843028' );
+INSERT INTO electricity_contract (id, price_energy, discount_energy, price_power, price_equipment, taxes, company_id) VALUES ('586ab7bc-5a26-4123-9328-07d082e4e9c8', 0.21, 6, 0.10, 1.79, 21, '4b08d856-f464-4bef-ad8d-a92186f1b237' );
+INSERT INTO electricity_contract (id, price_energy, discount_energy, price_power, price_equipment, taxes, company_id) VALUES ('8bd68ede-ea54-47e1-9e95-935ea933af60', 0.30, 10, 0.18, 1.56, 21, '8a28b5f0-c23f-451b-97f1-ad6bb190eff7' );
