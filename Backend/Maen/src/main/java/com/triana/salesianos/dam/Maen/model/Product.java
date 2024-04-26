@@ -34,7 +34,6 @@ public class Product {
 
     private int taxes;
 
-
     private Category category;
 
     @ManyToOne

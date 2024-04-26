@@ -1,12 +1,14 @@
 package com.triana.salesianos.dam.Maen.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -19,6 +21,7 @@ public class UsuarioMaen extends Usuario{
     private double salary;
 
     private int numMembersOfFamily;
+
 
     public UsuarioMaen(UUID id, String username, String password, String email, String nombre,
                        boolean accountNonExpired, boolean accountNonLocked, boolean credentialsNonExpired, boolean enabled,
