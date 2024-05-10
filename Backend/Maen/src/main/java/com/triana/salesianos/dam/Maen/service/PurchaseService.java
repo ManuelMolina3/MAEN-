@@ -1,6 +1,8 @@
 package com.triana.salesianos.dam.Maen.service;
 
 import com.triana.salesianos.dam.Maen.dto.purchase.GetPurchaseDTO;
+import com.triana.salesianos.dam.Maen.dto.purchase.GetPurchaseDetailsDTO;
+import com.triana.salesianos.dam.Maen.exception.NotFoundException;
 import com.triana.salesianos.dam.Maen.model.Purchase;
 import com.triana.salesianos.dam.Maen.repository.PurchaseRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,11 +25,19 @@ public class PurchaseService {
         LocalDate to = from.plusMonths(1).minusDays(1);
         Optional<List<Purchase>> purchases = repository.getPurchasebyMonth(from, to, idUserMaen);
         if(purchases.isEmpty()){
-            return ;
+            throw new NotFoundException("Purchase");
         }else{
-            return ;
+            return purchases.stream().map(GetPurchaseDTO::of).toList();
+
         }
 
+    }
+    public GetPurchaseDetailsDTO getPurchaseDetailsById(UUID idPurchase){
+        Optional<Purchase> purchase= repository.findById(idPurchase);
+        if (purchase.isPresent())
+            return GetPurchaseDetailsDTO.of(purchase.get());
+
+        throw new NotFoundException("Purchase Details");
     }
 
 }

@@ -14,4 +14,5 @@ public interface PurchaseRepository extends JpaRepository<Purchase, UUID> {
 
     @Query("SELECT * FROM Purchase WHERE date BETWEEN ? to ? AND idUserMaen = ?")
     Optional<List<Purchase>> getPurchasebyMonth(LocalDate from, LocalDate to, UUID idUserMaen);
+
 }
