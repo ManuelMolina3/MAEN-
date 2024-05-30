@@ -14,29 +14,18 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
+public class SalesLine {
 
     @Id
     @GeneratedValue(generator = "UUID")
     @UuidGenerator
     @Column(columnDefinition = "uuid")
-    private UUID id;
+    private UUID idSalesLine;
 
-    private String name;
+    private int amount;
 
-    private String image;
+    private double subTotal;
 
-    private String brand;
-
-    private double price;
-
-    private double priceKg;
-
-    private int taxes;
-
-    private Category category;
-
-    @ManyToOne
-    @JoinColumn(name = "supermarket_id")
-    private SuperMarket superMarket;
+    @OneToOne
+    private Product product;
 }
