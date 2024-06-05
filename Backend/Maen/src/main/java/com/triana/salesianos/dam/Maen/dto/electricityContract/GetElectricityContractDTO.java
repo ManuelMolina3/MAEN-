@@ -31,4 +31,15 @@ public record GetElectricityContractDTO(
                 .companyId(contract.getCompany().getId())
                 .build();
     }
+    public static GetElectricityContractDTO ofA (ElectricityContract contract){
+        return GetElectricityContractDTO.builder()
+                .id(contract.getId())
+                .priceEnergy(contract.getPriceEnergy())
+                .discountEnergy(contract.getDiscountEnergy())
+                .pricePower(contract.getPricePower())
+                .priceEquipment(contract.getPriceEquipment())
+                .taxes(contract.getTaxes())
+                .companyName(contract.getCompany().getName())
+                .build();
+    }
 }

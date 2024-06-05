@@ -1,5 +1,6 @@
 package com.triana.salesianos.dam.Maen.dto.product;
 
+import com.triana.salesianos.dam.Maen.model.Category;
 import com.triana.salesianos.dam.Maen.model.Product;
 import lombok.Builder;
 
@@ -16,7 +17,8 @@ public record GetProductDTO(
         double price,
 
         String superMarketName,
-        String superMarketImage
+        String superMarketImage,
+        Category category
 
 
 ) {
@@ -31,4 +33,16 @@ public record GetProductDTO(
                 .superMarketImage(p.getSuperMarket().getLogotype())
                 .build();
     }
+    public static GetProductDTO ofA (Product p){
+        return GetProductDTO.builder()
+                .id(p.getId())
+                .productName(p.getName())
+                .productImage(p.getImage())
+                .productBrand(p.getBrand())
+                .price(p.getPrice())
+                .superMarketName(p.getSuperMarket().getName())
+                .category(p.getCategory())
+                .build();
+    }
+
 }
