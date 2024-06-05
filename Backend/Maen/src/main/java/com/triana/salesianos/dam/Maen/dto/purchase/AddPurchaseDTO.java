@@ -6,8 +6,6 @@ import java.util.List;
 public record AddPurchaseDTO(
         LocalDate date,
         List<String> idSalesLine,
-
-        double total,
         String idUserMaen
 
 
