@@ -7,5 +7,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "Light Company", description = "")
-public class LigthCompany {
+public class ElectricityCompanyController {
 }

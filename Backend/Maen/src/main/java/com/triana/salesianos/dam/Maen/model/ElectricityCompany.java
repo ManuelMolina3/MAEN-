@@ -15,7 +15,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LigthCompany {
+public class ElectricityCompany {
     @Id
     @GeneratedValue(generator = "UUID")
     @UuidGenerator

@@ -3,9 +3,12 @@ package com.triana.salesianos.dam.Maen.service;
 import com.triana.salesianos.dam.Maen.dto.product.GetProductDTO;
 import com.triana.salesianos.dam.Maen.dto.product.GetProductDetailsDTO;
 import com.triana.salesianos.dam.Maen.exception.NotFoundException;
+import com.triana.salesianos.dam.Maen.exception.product.EmptyProductListException;
 import com.triana.salesianos.dam.Maen.model.Product;
 import com.triana.salesianos.dam.Maen.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -43,5 +46,13 @@ public class ProductService {
             return p;
         }
         
+    }
+    public Page<Product> findAll (Pageable pageable){
+        Page<Product> productList = repository.findAll(pageable);
+
+        if(productList.isEmpty())
+            throw new EmptyProductListException();
+        else
+            return productList;
     }
 }

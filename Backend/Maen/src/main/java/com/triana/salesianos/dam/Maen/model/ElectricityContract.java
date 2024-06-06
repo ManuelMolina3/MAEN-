@@ -34,5 +34,5 @@ public class ElectricityContract {
 
     @ManyToOne
     @JoinColumn(name = "company_id")
-    private LigthCompany company;
+    private ElectricityCompany company;
 }
