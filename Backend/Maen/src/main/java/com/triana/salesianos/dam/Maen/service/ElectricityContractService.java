@@ -1,9 +1,12 @@
 package com.triana.salesianos.dam.Maen.service;
 
 import com.triana.salesianos.dam.Maen.MyPage;
+import com.triana.salesianos.dam.Maen.dto.electricityContract.AddElectricityContractDTO;
 import com.triana.salesianos.dam.Maen.dto.electricityContract.GetElectricityContractDTO;
 import com.triana.salesianos.dam.Maen.exception.NotFoundException;
+import com.triana.salesianos.dam.Maen.exception.electricityCompany.ElectricityCompanyNotFoundException;
 import com.triana.salesianos.dam.Maen.exception.electricityContract.ElectricityContractListEmptyException;
+import com.triana.salesianos.dam.Maen.model.ElectricityCompany;
 import com.triana.salesianos.dam.Maen.model.ElectricityContract;
 import com.triana.salesianos.dam.Maen.repository.ElectricityContractRepository;
 import com.triana.salesianos.dam.Maen.repository.ElectricityCompanyRepository;
@@ -38,7 +41,7 @@ public class ElectricityContractService {
         return GetElectricityContractDTO.of(contractSelected.get());
     }
     public MyPage<GetElectricityContractDTO> getContractByCompany(UUID companyId, Pageable pageable){
-        Page<ElectricityContract> result = companyRepository.findElectricityContractByLightCompany(companyId, pageable);
+        Page<ElectricityContract> result = companyRepository.findElectricityContractByElectricityCompany(companyId, pageable);
 
         if (result.isEmpty())
             throw new NotFoundException("Contract");
@@ -52,5 +55,23 @@ public class ElectricityContractService {
             throw new ElectricityContractListEmptyException();
         else
             return electricityContractList;
+    }
+    public GetElectricityContractDTO save(AddElectricityContractDTO nuevo){
+        ElectricityContract ect = new ElectricityContract();
+        ect.setPriceEnergy(nuevo.priceEnergy());
+        ect.setDiscountEnergy(nuevo.discountEnergy());
+        ect.setPricePower(nuevo.pricePower());
+        ect.setPriceEquipment(nuevo.priceEquipment());
+        ect.setTaxes(nuevo.taxes());
+
+        Optional<ElectricityCompany> ec = companyRepository.findElectricityCompanyByName(nuevo.nameCompany());
+        if(ec.isEmpty())
+            throw new ElectricityCompanyNotFoundException();
+        else
+            ect.setCompany(ec.get());
+
+
+        repository.save(ect);
+        return GetElectricityContractDTO.of(ect);
     }
 }

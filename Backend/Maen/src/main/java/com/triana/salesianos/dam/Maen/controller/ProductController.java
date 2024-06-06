@@ -1,6 +1,7 @@
 package com.triana.salesianos.dam.Maen.controller;
 
 import com.triana.salesianos.dam.Maen.MyPage;
+import com.triana.salesianos.dam.Maen.dto.product.AddProductDTO;
 import com.triana.salesianos.dam.Maen.dto.product.GetProductDTO;
 import com.triana.salesianos.dam.Maen.dto.product.GetProductDetailsDTO;
 import com.triana.salesianos.dam.Maen.service.ProductService;
@@ -9,11 +10,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,4 +37,18 @@ public class ProductController {
     public ResponseEntity<List<GetProductDTO>> getProductByName(@PathVariable String name){
         return ResponseEntity.ok(service.getProductByName(name));
     }
+    @GetMapping("/all")
+    public MyPage<GetProductDTO> getAll (@PageableDefault(page = 0, size = 10)Pageable pageable){
+        return MyPage.of(service.findAll(pageable).map(GetProductDTO::of));
+    }
+    @PostMapping("/")
+    public ResponseEntity<GetProductDTO> createProduct (AddProductDTO nuevo){
+        GetProductDTO create = service.save(nuevo);
+        URI createdURI = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(create.id()).toUri();
+        return ResponseEntity.created(createdURI).body(create);
+    }
+
 }
