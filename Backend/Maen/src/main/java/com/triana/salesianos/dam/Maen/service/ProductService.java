@@ -1,11 +1,16 @@
 package com.triana.salesianos.dam.Maen.service;
 
+import com.triana.salesianos.dam.Maen.dto.product.AddProductDTO;
 import com.triana.salesianos.dam.Maen.dto.product.GetProductDTO;
 import com.triana.salesianos.dam.Maen.dto.product.GetProductDetailsDTO;
 import com.triana.salesianos.dam.Maen.exception.NotFoundException;
 import com.triana.salesianos.dam.Maen.exception.product.EmptyProductListException;
+import com.triana.salesianos.dam.Maen.exception.supermarket.SupermarketNotFoundException;
+import com.triana.salesianos.dam.Maen.model.Category;
 import com.triana.salesianos.dam.Maen.model.Product;
+import com.triana.salesianos.dam.Maen.model.SuperMarket;
 import com.triana.salesianos.dam.Maen.repository.ProductRepository;
+import com.triana.salesianos.dam.Maen.repository.SupermarketRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +26,7 @@ import java.util.UUID;
 public class ProductService {
 
     private final ProductRepository repository;
+    private final SupermarketRepository superRepository;
 
     public List<GetProductDTO> getAll (){
         return repository.findAll().stream().map(GetProductDTO::of).toList();
@@ -54,5 +60,26 @@ public class ProductService {
             throw new EmptyProductListException();
         else
             return productList;
+    }
+    public GetProductDTO save(AddProductDTO nuevo){
+        Product p = new Product();
+        p.setName(nuevo.name());
+        p.setImage(nuevo.image());
+        p.setBrand(nuevo.brand());
+        p.setPrice(nuevo.price());
+        p.setPriceKg(nuevo.priceKg());
+        p.setTaxes(nuevo.taxes());
+        p.setCategory(nuevo.category());
+
+        Optional<SuperMarket> sm = superRepository.findById(nuevo.supermarket().getId());
+
+        if(sm.isEmpty())
+            throw new SupermarketNotFoundException();
+        else
+            p.setSuperMarket(sm.get());
+
+
+        repository.save(p);
+        return GetProductDTO.of(p);
     }
 }
