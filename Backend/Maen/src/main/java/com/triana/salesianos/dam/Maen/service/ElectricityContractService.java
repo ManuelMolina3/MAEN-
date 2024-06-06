@@ -3,9 +3,10 @@ package com.triana.salesianos.dam.Maen.service;
 import com.triana.salesianos.dam.Maen.MyPage;
 import com.triana.salesianos.dam.Maen.dto.electricityContract.GetElectricityContractDTO;
 import com.triana.salesianos.dam.Maen.exception.NotFoundException;
+import com.triana.salesianos.dam.Maen.exception.electricityContract.ElectricityContractListEmptyException;
 import com.triana.salesianos.dam.Maen.model.ElectricityContract;
 import com.triana.salesianos.dam.Maen.repository.ElectricityContractRepository;
-import com.triana.salesianos.dam.Maen.repository.LigthCompanyRepository;
+import com.triana.salesianos.dam.Maen.repository.ElectricityCompanyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +20,7 @@ import java.util.UUID;
 public class ElectricityContractService {
 
     private final ElectricityContractRepository repository;
-    private final LigthCompanyRepository companyRepository;
+    private final ElectricityCompanyRepository companyRepository;
 
     public MyPage<GetElectricityContractDTO> getAll(Pageable pageable){
         Page<ElectricityContract> contractList= repository.findAll(pageable);
@@ -43,5 +44,13 @@ public class ElectricityContractService {
             throw new NotFoundException("Contract");
 
         return MyPage.of(result.map(GetElectricityContractDTO::of));
+    }
+    public Page<ElectricityContract> findAll (Pageable pageable){
+        Page<ElectricityContract> electricityContractList = repository.findAll(pageable);
+
+        if(electricityContractList.isEmpty())
+            throw new ElectricityContractListEmptyException();
+        else
+            return electricityContractList;
     }
 }
