@@ -25,8 +25,8 @@ public class SuperMarketService {
     private final SupermarketRepository repository;
     private final ProductRepository productRepository;
 
-    public Page<SuperMarket> findAll (Pageable pageable){
-        Page<SuperMarket> supermarketList = repository.findAllWithNumOfProduct(pageable);
+    public Page<GetSupermarketDTO> findAll (Pageable pageable){
+        Page<GetSupermarketDTO> supermarketList = repository.findAllWithNumOfProduct(pageable);
 
         if(supermarketList.isEmpty())
             throw new SupermarketListEmptyException();

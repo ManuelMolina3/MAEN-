@@ -10,14 +10,14 @@ public record GetSupermarketDTO(
         UUID id,
         String name,
         String logotype,
-        int numOfProduct
+        Long numOfProduct
 ) {
     public static GetSupermarketDTO of (SuperMarket supermarket){
         return GetSupermarketDTO.builder()
                 .id(supermarket.getId())
                 .name(supermarket.getName())
                 .logotype(supermarket.getLogotype())
-                .numOfProduct(0)
+                .numOfProduct(0L)
                 .build();
     }
 }

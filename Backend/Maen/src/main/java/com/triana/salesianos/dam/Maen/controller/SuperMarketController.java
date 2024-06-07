@@ -24,8 +24,9 @@ public class SuperMarketController {
 
     private final SuperMarketService service;
 
+    @GetMapping("/")
     public MyPage<GetSupermarketDTO> getAll (@PageableDefault(page = 0, size = 10) Pageable pageable){
-        return MyPage.of((service.findAll(pageable).map(GetSupermarketDTO::of)));
+        return MyPage.of((service.findAll(pageable)));
     }
     @PostMapping("/")
     public ResponseEntity<GetSupermarketDTO> createdSupermarket (AddSupermarketDTO nuevo){

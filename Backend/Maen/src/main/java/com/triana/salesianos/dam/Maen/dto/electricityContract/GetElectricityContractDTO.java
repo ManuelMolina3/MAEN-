@@ -4,6 +4,7 @@ import com.triana.salesianos.dam.Maen.model.ElectricityContract;
 import lombok.Builder;
 
 import java.util.UUID;
+import java.util.function.Function;
 @Builder
 public record GetElectricityContractDTO(
         UUID id,
@@ -16,7 +17,7 @@ public record GetElectricityContractDTO(
         String companyName,
         String companyLogotype,
         UUID companyId
-) {
+){
 
     public static GetElectricityContractDTO of (ElectricityContract contract){
         return GetElectricityContractDTO.builder()

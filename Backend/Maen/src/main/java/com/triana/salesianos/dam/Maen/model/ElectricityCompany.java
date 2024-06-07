@@ -34,4 +34,5 @@ public class ElectricityCompany {
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.REMOVE, orphanRemoval = true)
     List<ElectricityContract> contracts;
+
 }

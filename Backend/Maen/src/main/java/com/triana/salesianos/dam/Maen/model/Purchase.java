@@ -34,7 +34,8 @@ public class Purchase {
     @Column(columnDefinition = "uuid")
     private UUID idPurchase;
 
-    private UUID idUserMaen;
+    @ManyToOne
+    private UsuarioMaen user;
 
     private LocalDate date;
 

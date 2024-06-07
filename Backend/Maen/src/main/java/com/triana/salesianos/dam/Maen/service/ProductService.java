@@ -42,17 +42,16 @@ public class ProductService {
         return GetProductDetailsDTO.of(productSelected.get());
     }
     public List<GetProductDTO> getProductByName(String name){
-        Optional<List<Product>> productsSelected = repository.findByName(name);
+        List<Product> productsSelected = repository.findByName(name);
 
         if (productsSelected.isEmpty()) {
             throw new NotFoundException("Product");
         }else{
-            List<GetProductDTO> p = new ArrayList<>();
-            for (int i = 0; i < productsSelected.get().size(); i++) {
-                GetProductDTO g = GetProductDTO.of(productsSelected.get().get(i));
-                p.add(g);
+            List<GetProductDTO> pList = new ArrayList<>();
+            for (Product p : productsSelected) {
+                pList.add(GetProductDTO.of(p));
             }
-            return p;
+            return pList;
         }
         
     }
@@ -87,7 +86,7 @@ public class ProductService {
     }
     public void delete (UUID id){
         int num = repository.findProductInSalesLine(id);
-        int numSm = repository.findProductInSUpermarket(id);
+        int numSm = repository.findProductInSupermarket(id);
 
         if(num == 0){
             if(numSm == 0)

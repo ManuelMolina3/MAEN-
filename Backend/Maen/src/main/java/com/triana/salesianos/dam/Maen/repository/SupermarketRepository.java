@@ -1,5 +1,6 @@
 package com.triana.salesianos.dam.Maen.repository;
 
+import com.triana.salesianos.dam.Maen.dto.supermarket.GetSupermarketDTO;
 import com.triana.salesianos.dam.Maen.model.SuperMarket;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,17 +15,14 @@ public interface SupermarketRepository extends JpaRepository<SuperMarket, UUID> 
     @Query(
             """
             select new com.triana.salesianos.dam.Maen.dto.supermarket.GetSupermarketDTO(
-                sm.id, sm.name, sm.logoType,(
-                    select case
-                        when count(p) > 0 then count (p)
-                        else 0
-                    end
-                    from Product p
-                    where sm member of p.superMarket
+                sm.id, sm.name, sm.logotype,(
+                      select count(p)
+                        from Product p
+                            where p.superMarket.id = sm.id
                 )
             )
-            from Supermarket sm
+            from SuperMarket sm
             """
     )
-    Page<SuperMarket> findAllWithNumOfProduct(Pageable pageable);
+    Page<GetSupermarketDTO> findAllWithNumOfProduct(Pageable pageable);
 }

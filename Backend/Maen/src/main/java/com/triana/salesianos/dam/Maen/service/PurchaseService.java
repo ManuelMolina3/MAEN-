@@ -28,20 +28,18 @@ public class PurchaseService {
     private final ProductRepository productRepository;
 
 
-    public List<GetPurchaseDTO> obtenerVentasDeUnMes(int year, int month, UUID idUserMaen) {
+    public List<GetPurchaseDTO> obtenerVentasDeUnMes(int year, int month, UsuarioMaen user) {
         LocalDate from = LocalDate.of(year, month, 1);
         LocalDate to = from.plusMonths(1).minusDays(1);
-        List<Purchase> purchases = repository.getPurchasebyMonth(from, to, idUserMaen);
+        List<Purchase> purchases = repository.getPurchasebyMonth(from, to, user);
         if(purchases.isEmpty()){
             throw new NotFoundException("Purchase");
         }else{
-            List<GetPurchaseDTO> p = new ArrayList<>();
-            for (int i = 0; i<purchases.size(); i++){
-                GetPurchaseDTO g = GetPurchaseDTO.of(purchases.get(i));
-                p.add(g);
-
+            List<GetPurchaseDTO> pList = new ArrayList<>();
+            for (Purchase p : purchases){
+                pList.add(GetPurchaseDTO.of(p));
             }
-        return p;
+        return pList;
 
         }
 
@@ -59,7 +57,7 @@ public class PurchaseService {
 
     public Purchase addProductToPurchase(String idProduct, UsuarioMaen u, LocalDate date){
         Optional<Product> product = productRepository.findProductById(idProduct);
-        Optional<Purchase> purchase = repository.getPurchaseByDate(date, u.getId());
+        Optional<Purchase> purchase = repository.getPurchaseByDate(date, u);
 
         if(product.isEmpty()){
             throw new ProductNotFoundException();
@@ -72,7 +70,7 @@ public class PurchaseService {
                     .subtotal(product.get().getPrice())
                     .build();
             Purchase newPurchase = Purchase.builder()
-                    .idUserMaen(u.getId())
+                    .user(u)
                     .date(date)
                     .total(getTotalPriceOfPurchase(purchase.get().getIdPurchase()))
                     .build();

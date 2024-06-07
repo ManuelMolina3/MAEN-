@@ -4,6 +4,7 @@ import com.triana.salesianos.dam.Maen.model.ElectricityContract;
 import com.triana.salesianos.dam.Maen.model.UsuarioMaen;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,12 +14,12 @@ import java.util.UUID;
 public interface ElectricityContractRepository extends JpaRepository<ElectricityContract, UUID> {
 
     @Query("""
-            Select ec.usuarioMaen from ElectricityContract ec where ec.id = ?1
+            Select ec.users from ElectricityContract ec where ec.id = :id
             """)
-    List<UsuarioMaen> findAllUserHaveThisContract (UUID id);
+    List<UsuarioMaen> findAllUserHaveThisContract (@Param("id") UUID id);
 
     @Query("""
-            Select ec.electricityContract from ElectricityCompany ec WHERE ec.id ?1
+            select ec.contracts from ElectricityCompany ec where ec.id = :idElectricityCompany
             """)
-    List<ElectricityContract> findElectricityContractByElectricityCompany(UUID idElectricityCompany);
+    List<ElectricityContract> findElectricityContractByElectricityCompany(@Param("idElectricityCompany") UUID idElectricityCompany);
 }

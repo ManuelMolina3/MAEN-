@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -33,9 +34,9 @@ public class ElectricityContractController {
         return service.getContractById(id);
     }
 
-    @GetMapping("/company/{companyId}")
-    public MyPage<GetElectricityContractDTO> getContractByCompany (@PathVariable UUID companyId, @PageableDefault (page = 0, size = 10) Pageable pageable){
-        return service.getContractByCompany(companyId, pageable);
+    @GetMapping("/{companyId}")
+    public List<GetElectricityContractDTO> getContractByCompany (@PathVariable UUID companyId){
+        return service.getContractByCompany(companyId);
     }
     @GetMapping("/all")
     public MyPage<GetElectricityContractDTO> getAllA (@PageableDefault(page = 0, size = 10)Pageable pageable){
