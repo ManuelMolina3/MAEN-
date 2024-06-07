@@ -37,7 +37,7 @@ public class ElectricityCompanyController {
                 .buildAndExpand(create.id()).toUri();
         return ResponseEntity.created(createdURI).body(create);
     }
-    @DeleteMapping("/")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteElectricityCompany(@PathVariable UUID id){
         service.delete(id);
         return ResponseEntity.noContent().build();
