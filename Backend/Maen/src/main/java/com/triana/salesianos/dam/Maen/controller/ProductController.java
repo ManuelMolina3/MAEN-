@@ -43,7 +43,7 @@ public class ProductController {
         return MyPage.of(service.findAll(pageable).map(GetProductDTO::of));
     }
     @PostMapping("/")
-    public ResponseEntity<GetProductDTO> createProduct (AddProductDTO nuevo){
+    public ResponseEntity<GetProductDTO> createProduct (@RequestBody AddProductDTO nuevo){
         GetProductDTO create = service.save(nuevo);
         URI createdURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()

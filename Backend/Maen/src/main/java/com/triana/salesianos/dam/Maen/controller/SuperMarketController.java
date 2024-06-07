@@ -29,7 +29,7 @@ public class SuperMarketController {
         return MyPage.of((service.findAll(pageable)));
     }
     @PostMapping("/")
-    public ResponseEntity<GetSupermarketDTO> createdSupermarket (AddSupermarketDTO nuevo){
+    public ResponseEntity<GetSupermarketDTO> createdSupermarket (@RequestBody AddSupermarketDTO nuevo){
         GetSupermarketDTO create = service.save(nuevo);
         URI createdURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()

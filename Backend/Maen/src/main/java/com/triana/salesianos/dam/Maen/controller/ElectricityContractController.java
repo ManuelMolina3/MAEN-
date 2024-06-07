@@ -43,7 +43,7 @@ public class ElectricityContractController {
        return MyPage.of(service.findAll(pageable).map(GetElectricityContractDTO::of));
     }
     @PostMapping("/")
-    public ResponseEntity<GetElectricityContractDTO> createElectricityContract (AddElectricityContractDTO nuevo){
+    public ResponseEntity<GetElectricityContractDTO> createElectricityContract (@RequestBody AddElectricityContractDTO nuevo){
         GetElectricityContractDTO create = service.save(nuevo);
         URI createdURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()

@@ -73,7 +73,7 @@ public class ProductService {
         p.setTaxes(nuevo.taxes());
         p.setCategory(nuevo.category());
 
-        Optional<SuperMarket> sm = superRepository.findById(nuevo.supermarket().getId());
+        Optional<SuperMarket> sm = superRepository.findById(nuevo.supermarketId());
 
         if(sm.isEmpty())
             throw new SupermarketNotFoundException();

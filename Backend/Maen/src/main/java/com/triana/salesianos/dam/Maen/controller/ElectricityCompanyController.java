@@ -29,7 +29,7 @@ public class ElectricityCompanyController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<GetElectricityCompanyDTO> createProduct (AddElectricityCompanyDTO nuevo){
+    public ResponseEntity<GetElectricityCompanyDTO> createProduct (@RequestBody AddElectricityCompanyDTO nuevo){
         GetElectricityCompanyDTO create = service.save(nuevo);
         URI createdURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()

@@ -38,7 +38,6 @@ public class SuperMarketService {
         SuperMarket sm = new SuperMarket();
         sm.setName(nuevo.name());
         sm.setLogotype(nuevo.logotype());
-
         repository.save(sm);
 
         return GetSupermarketDTO.of(sm);
