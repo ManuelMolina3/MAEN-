@@ -7,6 +7,7 @@ import com.triana.salesianos.dam.Maen.exception.NotFoundException;
 import com.triana.salesianos.dam.Maen.exception.product.EmptyProductListException;
 import com.triana.salesianos.dam.Maen.exception.product.ProductInSalesLineException;
 import com.triana.salesianos.dam.Maen.exception.product.ProductInSupermarketException;
+import com.triana.salesianos.dam.Maen.exception.product.ProductNotFoundException;
 import com.triana.salesianos.dam.Maen.exception.supermarket.SupermarketNotFoundException;
 import com.triana.salesianos.dam.Maen.model.Category;
 import com.triana.salesianos.dam.Maen.model.Product;
@@ -95,6 +96,27 @@ public class ProductService {
                 throw new ProductInSupermarketException();
         } else{
             throw new ProductInSalesLineException();
+        }
+    }
+    public GetProductDTO edit (AddProductDTO editP, UUID id){
+        Optional<Product> p = repository.findById(id);
+
+        if(p.isEmpty()){
+            throw new ProductNotFoundException();
+        }else{
+            Product edit = p.get();
+
+            edit.setName(editP.name());
+            edit.setImage(editP.image());
+            edit.setBrand(editP.brand());
+            edit.setPrice(editP.price());
+            edit.setPriceKg(editP.priceKg());
+            edit.setTaxes(editP.taxes());
+            edit.setCategory(editP.category());
+
+
+            repository.save(edit);
+            return GetProductDTO.of(edit);
         }
     }
 }

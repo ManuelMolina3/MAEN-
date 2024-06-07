@@ -4,6 +4,7 @@ import com.triana.salesianos.dam.Maen.dto.supermarket.AddSupermarketDTO;
 import com.triana.salesianos.dam.Maen.dto.supermarket.GetSupermarketDTO;
 import com.triana.salesianos.dam.Maen.exception.supermarket.SupermarketListEmptyException;
 import com.triana.salesianos.dam.Maen.exception.supermarket.SupermarketNotDeleteException;
+import com.triana.salesianos.dam.Maen.exception.supermarket.SupermarketNotFoundException;
 import com.triana.salesianos.dam.Maen.model.Product;
 import com.triana.salesianos.dam.Maen.model.SuperMarket;
 import com.triana.salesianos.dam.Maen.repository.ProductRepository;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -49,4 +51,19 @@ public class SuperMarketService {
         else
             throw new SupermarketNotDeleteException();
     }
+    public GetSupermarketDTO edit (AddSupermarketDTO edit, UUID idSupermarket){
+        Optional<SuperMarket> smFind = repository.findById(idSupermarket);
+
+        if(smFind.isPresent()){
+
+            smFind.get().setName(edit.name());
+            smFind.get().setLogotype(edit.logotype());
+            repository.save(smFind.get());
+
+            return GetSupermarketDTO.of(smFind.get());
+        }else{
+            throw new SupermarketNotFoundException();
+        }
+    }
+
 }

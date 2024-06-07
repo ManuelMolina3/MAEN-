@@ -6,6 +6,7 @@ import com.triana.salesianos.dam.Maen.dto.product.GetProductDTO;
 import com.triana.salesianos.dam.Maen.dto.product.GetProductDetailsDTO;
 import com.triana.salesianos.dam.Maen.service.ProductService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -54,6 +55,10 @@ public class ProductController {
     public ResponseEntity<?> deleteProduct(@PathVariable UUID id){
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+    @PutMapping("/{id}")
+    public GetProductDTO editProduct (@Valid @RequestBody AddProductDTO edit, @PathVariable UUID id){
+        return service.edit(edit, id);
     }
 
 }

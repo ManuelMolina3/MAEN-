@@ -22,10 +22,9 @@ public interface ElectricityCompanyRepository extends JpaRepository<ElectricityC
             """)
     Page<ElectricityContract> findElectricityContractByElectricityCompany(@Param("companyId") UUID companyId, Pageable pageable);
 
-    @Query(
-            """
+    @Query("""
             select new com.triana.salesianos.dam.Maen.dto.supermarket.GetSupermarketDTO(
-                ec.id, ec.name, ec.logoType,(
+                ec.id, ec.name, ec.logotype,(
                     select case
                         when count(ect) > 0 then count (ect)
                         else 0
@@ -35,9 +34,8 @@ public interface ElectricityCompanyRepository extends JpaRepository<ElectricityC
                 )
             )
             from ElectricityCompany ec
-            """
-    )
-    Page<ElectricityCompany> findAllWithNumOfContract (Pageable pageable);
+            """)
+    Page<GetElectricityCompanyDTO> findAllWithNumOfContract (Pageable pageable);
 
     @Query("""
             Select ec from ElectricityCompany ec WHERE ec.name = :name

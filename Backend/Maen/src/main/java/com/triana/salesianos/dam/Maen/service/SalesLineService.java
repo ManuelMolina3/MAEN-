@@ -11,9 +11,5 @@ public class SalesLineService {
 
     private final SalesLineRepository repository;
 
-    public double AddSalesLine (AddSalesLineDTO nuevo){
-
-
-    }
 
 }

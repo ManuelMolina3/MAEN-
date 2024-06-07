@@ -4,6 +4,7 @@ import com.triana.salesianos.dam.Maen.dto.electricityCompany.AddElectricityCompa
 import com.triana.salesianos.dam.Maen.dto.electricityCompany.GetElectricityCompanyDTO;
 import com.triana.salesianos.dam.Maen.exception.electricityCompany.ElectricityCompanyListEmptyException;
 import com.triana.salesianos.dam.Maen.exception.electricityCompany.ElectricityCompanyNotDeleteException;
+import com.triana.salesianos.dam.Maen.exception.electricityCompany.ElectricityCompanyNotFoundException;
 import com.triana.salesianos.dam.Maen.model.ElectricityCompany;
 import com.triana.salesianos.dam.Maen.model.ElectricityContract;
 import com.triana.salesianos.dam.Maen.repository.ElectricityCompanyRepository;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -23,8 +25,8 @@ public class ElectricityCompanyService {
     private final ElectricityCompanyRepository repository;
     private final ElectricityContractRepository electricityContractRepository;
 
-    public Page<ElectricityCompany> findAll (Pageable pageable){
-        Page<ElectricityCompany> ElectricityCompanyList = repository.findAllWithNumOfContract(pageable);
+    public Page<GetElectricityCompanyDTO> findAll (Pageable pageable){
+        Page<GetElectricityCompanyDTO> ElectricityCompanyList = repository.findAllWithNumOfContract(pageable);
 
         if(ElectricityCompanyList.isEmpty())
             throw new ElectricityCompanyListEmptyException();
@@ -47,6 +49,19 @@ public class ElectricityCompanyService {
             repository.deleteById(idElectricityCompany);
         else
             throw new ElectricityCompanyNotDeleteException();
+    }
+    public GetElectricityCompanyDTO edit (AddElectricityCompanyDTO edit, UUID idElectricityCompany){
+        Optional<ElectricityCompany> ecFind = repository.findById(idElectricityCompany);
+
+        if(ecFind.isPresent()){
+            ecFind.get().setName(edit.name());
+            ecFind.get().setLogotype(edit.logotype());
+            repository.save(ecFind.get());
+
+            return GetElectricityCompanyDTO.of(ecFind.get());
+        }else{
+            throw new ElectricityCompanyNotFoundException();
+        }
     }
 
 }

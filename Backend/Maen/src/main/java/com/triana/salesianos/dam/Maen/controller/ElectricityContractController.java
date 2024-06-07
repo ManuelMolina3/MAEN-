@@ -5,6 +5,7 @@ import com.triana.salesianos.dam.Maen.dto.electricityContract.AddElectricityCont
 import com.triana.salesianos.dam.Maen.dto.electricityContract.GetElectricityContractDTO;
 import com.triana.salesianos.dam.Maen.service.ElectricityContractService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -53,6 +54,10 @@ public class ElectricityContractController {
     public ResponseEntity<?> deleteElectricityContract(@PathVariable UUID id){
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+    @PutMapping("/{id}")
+    public GetElectricityContractDTO editElectricityContract (@Valid @RequestBody AddElectricityContractDTO edited, @PathVariable UUID id){
+        return service.edit(edited, id);
     }
 
 }

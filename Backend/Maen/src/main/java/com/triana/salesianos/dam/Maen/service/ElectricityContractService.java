@@ -7,6 +7,7 @@ import com.triana.salesianos.dam.Maen.exception.NotFoundException;
 import com.triana.salesianos.dam.Maen.exception.electricityCompany.ElectricityCompanyNotFoundException;
 import com.triana.salesianos.dam.Maen.exception.electricityContract.ContractNotDeleteException;
 import com.triana.salesianos.dam.Maen.exception.electricityContract.ElectricityContractListEmptyException;
+import com.triana.salesianos.dam.Maen.exception.electricityContract.ElectricityContractNotFoundException;
 import com.triana.salesianos.dam.Maen.model.ElectricityCompany;
 import com.triana.salesianos.dam.Maen.model.ElectricityContract;
 import com.triana.salesianos.dam.Maen.model.UsuarioMaen;
@@ -86,5 +87,23 @@ public class ElectricityContractService {
             throw new ContractNotDeleteException();
 
 
+    }
+    public GetElectricityContractDTO edit (AddElectricityContractDTO editEct, UUID id){
+        Optional<ElectricityContract> ect = repository.findById(id);
+
+        if(ect.isEmpty()){
+            throw new ElectricityContractNotFoundException();
+        }else{
+            ElectricityContract edit = ect.get();
+
+            edit.setPriceEnergy(editEct.priceEnergy());
+            edit.setDiscountEnergy(editEct.discountEnergy());
+            edit.setPricePower(editEct.pricePower());
+            edit.setPriceEquipment(editEct.priceEquipment());
+            edit.setTaxes(editEct.taxes());
+
+            repository.save(edit);
+            return GetElectricityContractDTO.of(edit);
+        }
     }
 }
