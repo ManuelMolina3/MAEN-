@@ -37,7 +37,7 @@ public class SuperMarketController {
                 .buildAndExpand(create.id()).toUri();
         return ResponseEntity.created(createdURI).body(create);
     }
-    @DeleteMapping("/")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteSupermarket(@PathVariable UUID id){
         service.delete(id);
         return ResponseEntity.noContent().build();
