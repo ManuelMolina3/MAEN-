@@ -21,4 +21,14 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
             """)
     Optional<Product> findProductById(String id);
 
+    @Query("SELECT COUNT(sl) FROM SalesLine sl WHERE lp.product.id = ?1")
+    int findProductInSalesLine (UUID productId);
+
+    @Query("SELECT COUNT(sm) FROM SuperMarket sm WHERE sm.product.id = ?1")
+    int findProductInSUpermarket (UUID productId);
+
+    @Query("""
+            Select sm.product from SuperMarket sm where sm.id = ?1
+            """)
+    List<Product> findProductBySupermarket(UUID idSupermarket);
 }

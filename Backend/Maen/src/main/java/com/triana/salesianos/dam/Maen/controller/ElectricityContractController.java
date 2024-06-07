@@ -49,5 +49,10 @@ public class ElectricityContractController {
                 .buildAndExpand(create.id()).toUri();
         return ResponseEntity.created(createdURI).body(create);
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteElectricityContract(@PathVariable UUID id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }
