@@ -22,10 +22,10 @@ INSERT INTO Product(id, name, image, brand, price, price_kg, taxes, category, su
 INSERT INTO Product(id, name, image, brand, price, price_kg, taxes, category, superMarket_id) VALUES ('fc1e37eb-2db4-456d-9d9d-8645bd14d626', 'tomato', 'https://www.auchan.pt/dw/image/v2/BFRC_PRD/on/demandware.static/-/Sites-auchan-pt-master-catalog/default/dw0678a7a4/images/hi-res/002474035.jpg', 'auchan', 0.90, 1.10, 21, 0, '64c55bc0-9b75-46ae-b299-2cb7f8d1554f');
 INSERT INTO Product(id, name, image, brand, price, price_kg, taxes, category, superMarket_id) VALUES ('448bde02-d045-4d47-a912-40123f2665ad', 'tomato', 'https://www.clara.es/medio/2021/02/22/tomate-frito-ferrer_477a097f_1000x1500.jpg', 'ferrer', 1.60, 1.50, 21, 0, '5a810d7a-a62d-42a4-830c-905c78f1ce53');
 
-INSERT INTO ligth_company(id, name, logotype) VALUES('d92057c4-ac58-4738-99e1-2e05e1596308', 'TotalEnergy', 'https://brandemia.org/contenido/subidas/2021/05/portada-total-imagenes-brandemia-web-1000x670.jpg');
-INSERT INTO ligth_company(id, name, logotype) VALUES('94f4f1b0-fb02-4f2a-bf00-e0e751843028', 'Iberdrola', 'https://elperiodicodelaenergia.com/wp-content/uploads/2023/05/fotonoticia_20230524105438_1920.jpg');
-INSERT INTO ligth_company(id, name, logotype) VALUES('4b08d856-f464-4bef-ad8d-a92186f1b237', 'Endesa', 'https://www.endesa.com/content/dam/endesa-com/home/prensa/imagenes/kit-de-prensa/endesa-logo-prensa.jpg');
-INSERT INTO ligth_company(id, name, logotype) VALUES('8a28b5f0-c23f-451b-97f1-ad6bb190eff7', 'Naturgy', 'https://ieeb.fundacion-biodiversidad.es/sites/default/files/naturgy_rgb_principal_positiva_0.jpg');
+INSERT INTO electricity_company(id, name, logotype) VALUES('d92057c4-ac58-4738-99e1-2e05e1596308', 'TotalEnergy', 'https://brandemia.org/contenido/subidas/2021/05/portada-total-imagenes-brandemia-web-1000x670.jpg');
+INSERT INTO electricity_company(id, name, logotype) VALUES('94f4f1b0-fb02-4f2a-bf00-e0e751843028', 'Iberdrola', 'https://elperiodicodelaenergia.com/wp-content/uploads/2023/05/fotonoticia_20230524105438_1920.jpg');
+INSERT INTO electricity_company(id, name, logotype) VALUES('4b08d856-f464-4bef-ad8d-a92186f1b237', 'Endesa', 'https://www.endesa.com/content/dam/endesa-com/home/prensa/imagenes/kit-de-prensa/endesa-logo-prensa.jpg');
+INSERT INTO electricity_company(id, name, logotype) VALUES('8a28b5f0-c23f-451b-97f1-ad6bb190eff7', 'Naturgy', 'https://ieeb.fundacion-biodiversidad.es/sites/default/files/naturgy_rgb_principal_positiva_0.jpg');
 
 INSERT INTO electricity_contract (id, price_energy, discount_energy, price_power, price_equipment, taxes, company_id) VALUES ('4dd03371-7871-4f12-9555-e797c3d6e8fc', 0.26, 5, 0.13, 1.76, 21, 'd92057c4-ac58-4738-99e1-2e05e1596308' );
 INSERT INTO electricity_contract (id, price_energy, discount_energy, price_power, price_equipment, taxes, company_id) VALUES ('1efb96ec-c006-4ce7-abf9-c0bd4d761a47', 0.27, 4, 0.14, 1.56, 21, '94f4f1b0-fb02-4f2a-bf00-e0e751843028' );

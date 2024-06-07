@@ -19,7 +19,7 @@ public record GetSalesLineDTO(
                 .idSalesLine(sl.getIdSalesLine())
                 .amount(sl.getAmount())
                 .product(GetProductDTO.of(sl.getProduct()))
-                .subTotal(sl.getSubTotal())
+                .subTotal(sl.getSubtotal())
                 .build();
     }
 }

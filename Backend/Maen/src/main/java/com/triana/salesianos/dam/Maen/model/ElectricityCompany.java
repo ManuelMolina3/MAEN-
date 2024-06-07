@@ -15,7 +15,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LigthCompany {
+public class ElectricityCompany {
     @Id
     @GeneratedValue(generator = "UUID")
     @UuidGenerator
@@ -34,4 +34,5 @@ public class LigthCompany {
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.REMOVE, orphanRemoval = true)
     List<ElectricityContract> contracts;
+
 }

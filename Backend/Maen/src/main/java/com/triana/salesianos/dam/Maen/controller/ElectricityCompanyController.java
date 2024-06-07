@@ -1,9 +1,9 @@
 package com.triana.salesianos.dam.Maen.controller;
 
 import com.triana.salesianos.dam.Maen.MyPage;
-import com.triana.salesianos.dam.Maen.dto.supermarket.AddSupermarketDTO;
-import com.triana.salesianos.dam.Maen.dto.supermarket.GetSupermarketDTO;
-import com.triana.salesianos.dam.Maen.service.SuperMarketService;
+import com.triana.salesianos.dam.Maen.dto.electricityCompany.AddElectricityCompanyDTO;
+import com.triana.salesianos.dam.Maen.dto.electricityCompany.GetElectricityCompanyDTO;
+import com.triana.salesianos.dam.Maen.service.ElectricityCompanyService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,19 +18,19 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@Tag(name = "SuperMarket", description = "")
-@RequestMapping("/supermarket")
-public class SuperMarketController {
+@Tag(name = "Electricity Company", description = "")
+@RequestMapping("/company")
+public class ElectricityCompanyController {
 
-    private final SuperMarketService service;
-
+    private final ElectricityCompanyService service;
     @GetMapping("/")
-    public MyPage<GetSupermarketDTO> getAll (@PageableDefault(page = 0, size = 10) Pageable pageable){
-        return MyPage.of((service.findAll(pageable)));
+    public MyPage<GetElectricityCompanyDTO> getAll (@PageableDefault(page = 0, size = 10) Pageable pageable){
+        return MyPage.of(service.findAll(pageable));
     }
+
     @PostMapping("/")
-    public ResponseEntity<GetSupermarketDTO> createdSupermarket (@RequestBody AddSupermarketDTO nuevo){
-        GetSupermarketDTO create = service.save(nuevo);
+    public ResponseEntity<GetElectricityCompanyDTO> createProduct (@RequestBody AddElectricityCompanyDTO nuevo){
+        GetElectricityCompanyDTO create = service.save(nuevo);
         URI createdURI = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -38,12 +38,13 @@ public class SuperMarketController {
         return ResponseEntity.created(createdURI).body(create);
     }
     @DeleteMapping("/")
-    public ResponseEntity<?> deleteSupermarket(@PathVariable UUID id){
+    public ResponseEntity<?> deleteElectricityCompany(@PathVariable UUID id){
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
     @PutMapping("/{id}")
-    public GetSupermarketDTO editSupermarket (@Valid @RequestBody AddSupermarketDTO edit, @PathVariable UUID id){
+    public GetElectricityCompanyDTO editElectricityCompany (@Valid @RequestBody AddElectricityCompanyDTO edit, @PathVariable UUID id){
         return service.edit(edit, id);
     }
+
 }
