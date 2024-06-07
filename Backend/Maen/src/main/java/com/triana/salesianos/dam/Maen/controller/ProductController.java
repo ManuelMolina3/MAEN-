@@ -50,5 +50,10 @@ public class ProductController {
                 .buildAndExpand(create.id()).toUri();
         return ResponseEntity.created(createdURI).body(create);
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteProduct(@PathVariable UUID id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }

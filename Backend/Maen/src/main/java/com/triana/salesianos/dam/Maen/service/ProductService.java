@@ -5,6 +5,8 @@ import com.triana.salesianos.dam.Maen.dto.product.GetProductDTO;
 import com.triana.salesianos.dam.Maen.dto.product.GetProductDetailsDTO;
 import com.triana.salesianos.dam.Maen.exception.NotFoundException;
 import com.triana.salesianos.dam.Maen.exception.product.EmptyProductListException;
+import com.triana.salesianos.dam.Maen.exception.product.ProductInSalesLineException;
+import com.triana.salesianos.dam.Maen.exception.product.ProductInSupermarketException;
 import com.triana.salesianos.dam.Maen.exception.supermarket.SupermarketNotFoundException;
 import com.triana.salesianos.dam.Maen.model.Category;
 import com.triana.salesianos.dam.Maen.model.Product;
@@ -81,5 +83,18 @@ public class ProductService {
 
         repository.save(p);
         return GetProductDTO.of(p);
+    }
+    public void delete (UUID id){
+        int num = repository.findProductInSalesLine(id);
+        int numSm = repository.findProductInSUpermarket(id);
+
+        if(num == 0){
+            if(numSm == 0)
+                repository.deleteById(id);
+            else
+                throw new ProductInSupermarketException();
+        } else{
+            throw new ProductInSalesLineException();
+        }
     }
 }

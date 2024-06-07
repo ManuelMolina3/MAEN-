@@ -5,9 +5,11 @@ import com.triana.salesianos.dam.Maen.dto.electricityContract.AddElectricityCont
 import com.triana.salesianos.dam.Maen.dto.electricityContract.GetElectricityContractDTO;
 import com.triana.salesianos.dam.Maen.exception.NotFoundException;
 import com.triana.salesianos.dam.Maen.exception.electricityCompany.ElectricityCompanyNotFoundException;
+import com.triana.salesianos.dam.Maen.exception.electricityContract.ContractNotDeleteException;
 import com.triana.salesianos.dam.Maen.exception.electricityContract.ElectricityContractListEmptyException;
 import com.triana.salesianos.dam.Maen.model.ElectricityCompany;
 import com.triana.salesianos.dam.Maen.model.ElectricityContract;
+import com.triana.salesianos.dam.Maen.model.UsuarioMaen;
 import com.triana.salesianos.dam.Maen.repository.ElectricityContractRepository;
 import com.triana.salesianos.dam.Maen.repository.ElectricityCompanyRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -73,5 +76,15 @@ public class ElectricityContractService {
 
         repository.save(ect);
         return GetElectricityContractDTO.of(ect);
+    }
+    public void delete (UUID idContract){
+        List<UsuarioMaen> ContractWithUser = repository.findAllUserHaveThisContract(idContract);
+
+        if(ContractWithUser.isEmpty())
+            repository.deleteById(idContract);
+        else
+            throw new ContractNotDeleteException();
+
+
     }
 }
