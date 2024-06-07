@@ -10,14 +10,14 @@ public record GetElectricityCompanyDTO(
         UUID id,
         String name,
         String urlImage,
-        int numOfContract
+        Long numOfContract
 ) {
     public static GetElectricityCompanyDTO of(ElectricityCompany ec){
         return GetElectricityCompanyDTO.builder()
                 .id(ec.getId())
                 .name(ec.getName())
                 .urlImage(ec.getLogotype())
-                .numOfContract(0)
+                .numOfContract(0L)
                 .build();
     }
 }

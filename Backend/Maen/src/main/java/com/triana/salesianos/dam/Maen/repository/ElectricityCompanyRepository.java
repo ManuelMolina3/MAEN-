@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 @Repository
@@ -17,32 +18,27 @@ public interface ElectricityCompanyRepository extends JpaRepository<ElectricityC
 
 
     @Query("""
-            SELECT e FROM ElectricityContract e
-            WHERE e.company.id = :companyId
-            """)
-    Page<ElectricityContract> findElectricityContractByElectricityCompany(@Param("companyId") UUID companyId, Pageable pageable);
+    select e from ElectricityContract e
+    where e.company.id = :companyId
+    """)
+    List<ElectricityContract> findElectricityContractByElectricityCompany(@Param("companyId") UUID companyId);
 
-    @Query(
-            """
-            select new com.triana.salesianos.dam.Maen.dto.supermarket.GetSupermarketDTO(
-                ec.id, ec.name, ec.logoType,(
-                    select case
-                        when count(ect) > 0 then count (ect)
-                        else 0
-                    end
-                    from ElectricityContract ect
-                    where ec member of ect.company
+    @Query("""
+            select new com.triana.salesianos.dam.Maen.dto.electricityCompany.GetElectricityCompanyDTO(
+                ec.id, ec.name, ec.logotype,(
+                    select count(ect)
+                        from ElectricityContract ect
+                            where ect.company.id = ec.id
                 )
             )
             from ElectricityCompany ec
-            """
-    )
-    Page<ElectricityCompany> findAllWithNumOfContract (Pageable pageable);
+            """)
+    Page<GetElectricityCompanyDTO> findAllWithNumOfContract (Pageable pageable);
 
     @Query("""
-            Select ec from ElectricityCompany ec WHERE ec.name = :name
+            select ec from ElectricityCompany ec where ec.name = :name
             """)
-    Optional<ElectricityCompany> findElectricityCompanyByName(String name);
+    Optional<ElectricityCompany> findElectricityCompanyByName(@Param("name") String name);
 
 
 }

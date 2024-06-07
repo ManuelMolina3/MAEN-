@@ -7,6 +7,7 @@ import com.triana.salesianos.dam.Maen.exception.NotFoundException;
 import com.triana.salesianos.dam.Maen.exception.product.EmptyProductListException;
 import com.triana.salesianos.dam.Maen.exception.product.ProductInSalesLineException;
 import com.triana.salesianos.dam.Maen.exception.product.ProductInSupermarketException;
+import com.triana.salesianos.dam.Maen.exception.product.ProductNotFoundException;
 import com.triana.salesianos.dam.Maen.exception.supermarket.SupermarketNotFoundException;
 import com.triana.salesianos.dam.Maen.model.Category;
 import com.triana.salesianos.dam.Maen.model.Product;
@@ -41,17 +42,16 @@ public class ProductService {
         return GetProductDetailsDTO.of(productSelected.get());
     }
     public List<GetProductDTO> getProductByName(String name){
-        Optional<List<Product>> productsSelected = repository.findByName(name);
+        List<Product> productsSelected = repository.findByName(name);
 
         if (productsSelected.isEmpty()) {
             throw new NotFoundException("Product");
         }else{
-            List<GetProductDTO> p = new ArrayList<>();
-            for (int i = 0; i < productsSelected.get().size(); i++) {
-                GetProductDTO g = GetProductDTO.of(productsSelected.get().get(i));
-                p.add(g);
+            List<GetProductDTO> pList = new ArrayList<>();
+            for (Product p : productsSelected) {
+                pList.add(GetProductDTO.of(p));
             }
-            return p;
+            return pList;
         }
         
     }
@@ -73,7 +73,7 @@ public class ProductService {
         p.setTaxes(nuevo.taxes());
         p.setCategory(nuevo.category());
 
-        Optional<SuperMarket> sm = superRepository.findById(nuevo.supermarket().getId());
+        Optional<SuperMarket> sm = superRepository.findById(nuevo.supermarketId());
 
         if(sm.isEmpty())
             throw new SupermarketNotFoundException();
@@ -86,7 +86,7 @@ public class ProductService {
     }
     public void delete (UUID id){
         int num = repository.findProductInSalesLine(id);
-        int numSm = repository.findProductInSUpermarket(id);
+        int numSm = repository.findProductInSupermarket(id);
 
         if(num == 0){
             if(numSm == 0)
@@ -95,6 +95,27 @@ public class ProductService {
                 throw new ProductInSupermarketException();
         } else{
             throw new ProductInSalesLineException();
+        }
+    }
+    public GetProductDTO edit (AddProductDTO editP, UUID id){
+        Optional<Product> p = repository.findById(id);
+
+        if(p.isEmpty()){
+            throw new ProductNotFoundException();
+        }else{
+            Product edit = p.get();
+
+            edit.setName(editP.name());
+            edit.setImage(editP.image());
+            edit.setBrand(editP.brand());
+            edit.setPrice(editP.price());
+            edit.setPriceKg(editP.priceKg());
+            edit.setTaxes(editP.taxes());
+            edit.setCategory(editP.category());
+
+
+            repository.save(edit);
+            return GetProductDTO.of(edit);
         }
     }
 }

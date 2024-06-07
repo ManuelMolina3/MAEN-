@@ -1,7 +1,6 @@
 package com.triana.salesianos.dam.Maen.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,6 +20,12 @@ public class UsuarioMaen extends Usuario{
     private double salary;
 
     private int numMembersOfFamily;
+
+    @ManyToOne
+    private ElectricityContract contract;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true,fetch = FetchType.EAGER)
+    private List<Purchase> purchases;
 
 
     public UsuarioMaen(UUID id, String username, String password, String email, String nombre,
