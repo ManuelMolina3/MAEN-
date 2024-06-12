@@ -1,0 +1,47 @@
+<table class="table table-striped table-secondary table-hover table-responsive">
+    <thead>
+        <tr class="table-dark">
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Logotype</th>
+            <th scope="col">Number of Products</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+            <tr *ngFor="let supermarket of supermarketList;">
+                <td>
+                    {{ supermarket.id }}
+                </td>
+                <td>
+                    {{supermarket.name }}
+                </td>
+                <td>
+                    {{supermarket.logotype}}
+                </td>
+                <td>
+                    {{supermarket.numOfProducts}}
+                </td>
+                <td>
+                    <button icon="pi pi-pen-to-square"></button>
+                </td>
+                <td>
+                    <button icon="pi pi-trash"></button>
+                </td>
+            </tr>
+    </tbody>
+    <tfoot>
+        <div class="pagination justify-content-center">
+            <ngb-pagination
+              class="custom-pagination"
+              [maxSize]="2"
+              [boundaryLinks]="true"
+              [collectionSize]="count"
+              [(page)]="page"
+              [pageSize]="pageSize"
+              (pageChange)="loadNewSupermarketPage()"
+              aria-label="Default pagination"
+            ></ngb-pagination>
+          </div>
+    </tfoot>
+</table>
