@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SupermarketResponse } from '../models/supermarket/supermarket-response.interface';
+import { Supermarket, SupermarketResponse } from '../models/supermarket/supermarket-response.interface';
 import { environment } from '../../environments/environment';
+import { AddSupermarketDTO } from '../models/supermarket/add-supermarket-dto.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,25 @@ export class SupermarketService {
         'Authorization': `Bearer ${localStorage.getItem(this.authTokenKey)}`
       })
     })
+  }
+  createNewSupermarket(createSupermarket: AddSupermarketDTO): Observable<Supermarket>{
+    return this.http.post<Supermarket>(`${environment.apiBaseUrl}/supermarket/`,
+      {
+        name: createSupermarket.name,
+        logotype: createSupermarket.logotype
+      },
+      {
+        headers: {
+          accept: 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem(this.authTokenKey)}`
+        }
+      })
+  }
+  findAll(): Observable<SupermarketResponse>{
+    return this.http.get<SupermarketResponse>(`${environment.apiBaseUrl}/supermarket/all`,{
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem(this.authTokenKey)}`
+      })
+    });
   }
 }
