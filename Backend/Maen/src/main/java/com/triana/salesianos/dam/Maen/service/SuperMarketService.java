@@ -64,5 +64,13 @@ public class SuperMarketService {
             throw new SupermarketNotFoundException();
         }
     }
+    public List<SuperMarket> getAll (){
+        List<SuperMarket> supermarketList = repository.findAll();
+
+        if(supermarketList.isEmpty())
+            throw new SupermarketListEmptyException();
+        else
+            return supermarketList;
+    }
 
 }

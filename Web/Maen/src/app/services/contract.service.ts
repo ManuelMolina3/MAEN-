@@ -19,6 +19,7 @@ export class ContractService {
       })
     })
   }
+
   createNewContract(createContract: AddContractDTO): Observable<Contract>{
     return this.http.post<Contract>(`${environment.apiBaseUrl}/contract/`,
       {

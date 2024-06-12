@@ -4,6 +4,8 @@ import { ContractService } from '../../services/contract.service';
 import { ActivatedRoute } from '@angular/router';
 import { AddContractDTO } from '../../models/contract/add-contract-dto.interface';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Company } from '../../models/company/company-response.interface';
+import { CompanyService } from '../../services/company.service';
 
 @Component({
   selector: 'app-contract-page',
@@ -28,7 +30,9 @@ export class ContractPageComponent implements OnInit{
   priceEquipmentErr: string = '';
   taxesErr: string = '';
   nameCompanyErr: string = '';
-  constructor(private contractService: ContractService, private modalService: NgbModal){
+  companyList!: Company[];
+  idCompany: string = '';
+  constructor(private contractService: ContractService, private modalService: NgbModal, private companyService: CompanyService){
 
   }
   ngOnInit(): void {
@@ -36,6 +40,9 @@ export class ContractPageComponent implements OnInit{
   }
   open(content: TemplateRef<any>) {
     this.modalService.open(content);
+  }
+  capturar(nameCompany: any){
+    this.idCompany = nameCompany;
   }
   loadNewContractPage(){
     this.contractService.getAll(this.page).subscribe((resp)=>{
@@ -48,6 +55,11 @@ export class ContractPageComponent implements OnInit{
       }
       window.scrollTo({top: 0, behavior: 'smooth'});
     })
+  }
+  getAllCompanies(){
+    this.companyService.getAllCompanies().subscribe((resp)=>{
+      this.companyList = resp;
+    });
   }
 
 saveCreatedContract(){

@@ -19,6 +19,13 @@ export class CompanyService {
       })
     })
   }
+  getAllCompanies(): Observable<Company[]>{
+    return this.http.get<Company[]>(`${environment.apiBaseUrl}/company/all`, {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem(this.authTokenKey)}`
+      })
+    })
+  }
   createNewCompany(createCompany: AddCompanyDTO): Observable<Company>{
     return this.http.post<Company>(`${environment.apiBaseUrl}/company/`,
       {

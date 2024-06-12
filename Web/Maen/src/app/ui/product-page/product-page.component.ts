@@ -57,7 +57,7 @@ export class ProductPageComponent implements OnInit{
   }
   findAllSupermarket(){
     this.supermarketSevice.findAll().subscribe((resp)=>{
-      this.supermarketList= resp.content;
+      this.supermarketList= resp;
     });
   }
   capturar(id: any){

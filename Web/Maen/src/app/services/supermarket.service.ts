@@ -33,8 +33,8 @@ export class SupermarketService {
         }
       })
   }
-  findAll(): Observable<SupermarketResponse>{
-    return this.http.get<SupermarketResponse>(`${environment.apiBaseUrl}/supermarket/all`,{
+  findAll(): Observable<Supermarket[]>{
+    return this.http.get<Supermarket[]>(`${environment.apiBaseUrl}/supermarket/all`,{
       headers: new HttpHeaders({
         'Authorization': `Bearer ${localStorage.getItem(this.authTokenKey)}`
       })

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -26,6 +27,10 @@ public class ElectricityCompanyController {
     @GetMapping("/")
     public MyPage<GetElectricityCompanyDTO> getAll (@PageableDefault(page = 0, size = 10) Pageable pageable){
         return MyPage.of(service.findAll(pageable));
+    }
+    @GetMapping("/all")
+    public List<GetElectricityCompanyDTO> findAll(){
+        return service.findAll();
     }
 
     @PostMapping("/")

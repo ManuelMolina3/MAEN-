@@ -10,7 +10,9 @@
             <th scope="col">Company name</th>
             <th scope="col">Company logotype</th>
             <th scope="col">Company id</th>
-            <th scope="col"></th>
+            <th scope="col">
+                <button class="btn btn-primary fs-5" (click)="open(content)">Add</button>
+            </th>
         </tr>
     </thead>
     <tbody class="table-group-divider">
@@ -65,4 +67,132 @@
           </div>
     </tfoot>
 </table>
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add new contract</h4>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="mb-3">
+          <label for="priceEnergy">Price of energy</label>
+          <div class="form-group">
+            <input
+              id="priceEnergy"
+              name="priceEnergy"
+              type="number"
+              class="form-control"
+              placeholder="0.004"
+              [(ngModel)]="priceEnergy"
+              required
+            />
+            <div id="priceEnergyErr" class="text-danger mx-3">{{ priceEnergyErr }}</div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="discountEnergy">Discount of energy</label>
+          <div class="input-group">
+            <input
+              id="discountEnergy"
+              class="form-control"
+              placeholder="12"
+              name="discountEnergy"
+              ngbDatepicker
+              [(ngModel)]="discountEnergy"
+              required
+            />
+          </div>
+          <div id="discountEnergyErr" class="text-danger mx-3">
+            {{ discountEnergyErr }}
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="pricePower">Price of power</label>
+          <div class="form-group">
+            <input
+              id="pricePower"
+              name="pricePower"
+              class="form-control"
+              type="number"
+              placeholder="1290"
+              [(ngModel)]="pricePower"
+              required
+            />
+            <div id="pricePowerErr" class="text-danger mx-3">
+              {{ pricePowerErr }}
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+            <label for="priceEquipment">Price of equipment</label>
+            <div class="form-group">
+              <input
+                id="priceEquipment"
+                name="priceEquipment"
+                class="form-control"
+                type="number"
+                placeholder="13.04"
+                [(ngModel)]="priceEquipment"
+                required
+              />
+              <div id="priceEquipmentErr" class="text-danger mx-3">
+                {{ priceEquipmentErr }}
+              </div>
+            </div>
+        </div>
+        <div class="mb-3">
+          <label for="taxes">Taxes</label>
+          <div class="form-group">
+            <input
+              id="taxes"
+              name="taxes"
+              class="form-control"
+              placeholder="10"
+              type="number"
+              [(ngModel)]="taxes"
+              required
+            />
+            <div id="taxesErr" class="text-danger mx-3">
+              {{ taxesErr }}
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+            <label for="company">Company</label>
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              (change)="capturar(company.value)"
+              #company
+            >
+              <option
+                [value]="company.name"
+                *ngFor="let company of companyList"
+                id="nameCompany"
+              >
+                {{ company.name }}
+              </option>
+            </select>
+            <div id="nameCompanyErr" class="text-danger mx-3">
+              {{ nameCompanyErr}}
+            </div>
+          </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="saveCreatedContract()"
+      >
+        Save
+      </button>
+    </div>
+  </ng-template>
+  
 
