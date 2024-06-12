@@ -5,7 +5,8 @@
             <th scope="col">Name</th>
             <th scope="col">Logotype</th>
             <th scope="col">Number of Products</th>
-            <th scope="col"></th>
+            <th scope="col"><button class="btn btn-primary fs-5" (click)="open(content)">Add</button>
+            </th>
         </tr>
     </thead>
     <tbody class="table-group-divider">
@@ -20,7 +21,7 @@
                     {{supermarket.logotype}}
                 </td>
                 <td>
-                    {{supermarket.numOfProducts}}
+                    {{supermarket.numOfProduct}}
                 </td>
                 <td>
                     <button icon="pi pi-pen-to-square"></button>
@@ -45,3 +46,60 @@
           </div>
     </tfoot>
 </table>
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add new supermarket</h4>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="mb-3">
+          <label for="name">Name</label>
+          <div class="form-group">
+            <input
+              id="name"
+              name="name"
+              type="text"
+              class="form-control"
+              placeholder="Paco pepe"
+              [(ngModel)]="name"
+              required
+            />
+            <div id="namErr" class="text-danger mx-3">{{ nameErr }}</div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="logotype">Logotype</label>
+          <div class="input-group">
+            <input
+              id="logotype"
+              class="form-control"
+              placeholder="https://prod-mercadona.imgix.net/images/d9b74d242c05f180baf1f2af25255867.jpg"
+              name="logotype"
+              ngbDatepicker
+              #dp="ngbDatepicker"
+              [(ngModel)]="logotype"
+              required
+            />
+          </div>
+          <div id="logotypeErr" class="text-danger mx-3">
+            {{ logotypeErr }}
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="saveCreatedSupermarket()"
+      >
+        Save
+      </button>
+    </div>
+  </ng-template>

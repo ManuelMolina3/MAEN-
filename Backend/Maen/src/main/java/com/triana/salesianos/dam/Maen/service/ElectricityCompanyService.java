@@ -26,12 +26,12 @@ public class ElectricityCompanyService {
     private final ElectricityContractRepository electricityContractRepository;
 
     public Page<GetElectricityCompanyDTO> findAll (Pageable pageable){
-        Page<GetElectricityCompanyDTO> ElectricityCompanyList = repository.findAllWithNumOfContract(pageable);
+        Page<GetElectricityCompanyDTO> electricityCompanyList = repository.findAllWithNumOfContract(pageable);
 
-        if(ElectricityCompanyList.isEmpty())
+        if(electricityCompanyList.isEmpty())
             throw new ElectricityCompanyListEmptyException();
         else
-            return ElectricityCompanyList;
+            return electricityCompanyList;
     }
     public GetElectricityCompanyDTO save (AddElectricityCompanyDTO nuevo){
         ElectricityCompany ec = new ElectricityCompany();
@@ -62,6 +62,14 @@ public class ElectricityCompanyService {
         }else{
             throw new ElectricityCompanyNotFoundException();
         }
+    }
+    public List<GetElectricityCompanyDTO> findAll(){
+        List<ElectricityCompany> electricityCompanyList = repository.findAll();
+
+        if(electricityCompanyList.isEmpty())
+            throw new ElectricityCompanyListEmptyException();
+        else
+            return electricityCompanyList.stream().map(GetElectricityCompanyDTO::of).toList();
     }
 
 }

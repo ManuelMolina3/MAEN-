@@ -10,5 +10,5 @@ export interface Supermarket{
     id: string;
     name: string;
     logotype: string;
-    numOfProducts: number;
+    numOfProduct: number;
 }

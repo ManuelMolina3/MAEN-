@@ -1,8 +1,9 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
-import { ProductResponse } from '../models/product/product-response.interface';
+import { Observable} from 'rxjs';
+import { Product, ProductResponse } from '../models/product/product-response.interface';
 import { environment } from '../../environments/environment.development';
+import { AddProductDTO } from '../models/product/add-product-dto.interface';
 
 
 @Injectable({
@@ -20,5 +21,24 @@ export class ProductService {
       })
     })
   
+  }
+  createNewProduct(createProduct: AddProductDTO): Observable<Product>{
+    return this.http.post<Product>(`${environment.apiBaseUrl}/product/`,
+      {
+        name: createProduct.name,
+        image: createProduct.image,
+        brand: createProduct.brand,
+        price: createProduct.price,
+        priceKg: createProduct.priceKg,
+        taxes: createProduct.taxes,
+        category: createProduct.category,
+        supermarketId: createProduct.supermarketId,
+      },
+      {
+        headers: {
+          accept: 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem(this.authTokenKey)}`
+        }
+      })
   }
 }

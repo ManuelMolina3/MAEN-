@@ -9,7 +9,9 @@
             <th scope="col">Supermarket name</th>
             <th scope="col">Supermarket image</th>
             <th scope="col">Category</th>
-            <th scope="col"></th>
+            <th scope="col">    
+                <button class="btn btn-primary fs-5" (click)="open(content)">Add</button>
+            </th>
         </tr>
     </thead>
     <tbody class="table-group-divider">
@@ -61,3 +63,149 @@
           </div>
     </tfoot>
 </table>
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add new product</h4>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="mb-3">
+          <label for="name">Name</label>
+          <div class="form-group">
+            <input
+              id="name"
+              name="name"
+              type="text"
+              class="form-control"
+              placeholder="Paco pepe"
+              [(ngModel)]="name"
+              required
+            />
+            <div id="namErr" class="text-danger mx-3">{{ namErr }}</div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="image">Url image</label>
+          <div class="input-group">
+            <input
+              id="image"
+              class="form-control"
+              placeholder="https://prod-mercadona.imgix.net/images/d9b74d242c05f180baf1f2af25255867.jpg"
+              name="image"
+              ngbDatepicker
+              #dp="ngbDatepicker"
+              [(ngModel)]="image"
+              required
+            />
+          </div>
+          <div id="imageErr" class="text-danger mx-3">
+            {{ imageErr }}
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="brand">Brand</label>
+          <div class="form-group">
+            <input
+              id="brand"
+              name="brand"
+              class="form-control"
+              type="text"
+              placeholder="Hacendado"
+              [(ngModel)]="brand"
+              required
+            />
+            <div id="brandErr" class="text-danger mx-3">
+              {{ brandErr }}
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+            <label for="price">Price</label>
+            <div class="form-group">
+              <input
+                id="price"
+                name="price"
+                class="form-control"
+                type="number"
+                placeholder="13.04"
+                [(ngModel)]="price"
+                required
+              />
+              <div id="priceErr" class="text-danger mx-3">
+                {{ priceErr }}
+              </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="priceKg">Price Kg</label>
+            <div class="form-group">
+              <input
+                id="priceKg"
+                name="priceKg"
+                class="form-control"
+                type="number"
+                placeholder="13.04"
+                [(ngModel)]="priceKg"
+                required
+              />
+              <div id="priceKgErr" class="text-danger mx-3">
+                {{ priceKgErr }}
+              </div>
+        </div>
+        </div>
+        <div class="mb-3">
+          <label for="taxes">Taxes</label>
+          <div class="form-group">
+            <input
+              id="taxes"
+              name="taxes"
+              class="form-control"
+              placeholder="10"
+              type="number"
+              [(ngModel)]="taxes"
+              required
+            />
+            <div id="taxesErr" class="text-danger mx-3">
+              {{ taxesErr }}
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+            <label for="supermarket">Supermarket</label>
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              (change)="capturar(supermarket.value)"
+              #supermarket
+            >
+              <option
+                [value]="supermarket.id"
+                *ngFor="let supermarket of supermarketList"
+                id="idSupermarket"
+              >
+                {{ supermarket.name }}
+              </option>
+            </select>
+            <div id="supermarketIdErr" class="text-danger mx-3">
+              {{ supermarketIdErr}}
+            </div>
+          </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-outline-dark"
+        (click)="saveCreatedProduct()"
+      >
+        Save
+      </button>
+    </div>
+  </ng-template>
+  

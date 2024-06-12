@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CompanyResponse } from '../models/company/company-response.interface';
+import { Company, CompanyResponse } from '../models/company/company-response.interface';
 import { environment } from '../../environments/environment';
+import { AddCompanyDTO } from '../models/company/add-company-dto.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +18,25 @@ export class CompanyService {
         'Authorization': `Bearer ${localStorage.getItem(this.authTokenKey)}`
       })
     })
+  }
+  getAllCompanies(): Observable<Company[]>{
+    return this.http.get<Company[]>(`${environment.apiBaseUrl}/company/all`, {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem(this.authTokenKey)}`
+      })
+    })
+  }
+  createNewCompany(createCompany: AddCompanyDTO): Observable<Company>{
+    return this.http.post<Company>(`${environment.apiBaseUrl}/company/`,
+      {
+        name: createCompany.name,
+        logotype: createCompany.logotype,
+      },
+      {
+        headers: {
+          accept: 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem(this.authTokenKey)}`
+        }
+      })
   }
 }
