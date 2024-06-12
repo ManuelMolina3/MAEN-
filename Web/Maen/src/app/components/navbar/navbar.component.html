@@ -1,0 +1,28 @@
+<nav id="sidebar" class="collapse d-lg-block sidebar">
+    <div class="position-sticky">
+        <div class="list-group list-group-flush mx-3 mt-4">
+            <a [routerLink]="['product/']"
+                class="d-flex align-items-center pb-5 mb-md-0 me-md-auto text-black text-decoration-none">
+                <img src="../../../assets/logoAppIntro.png" alt="Logo de la aplicación" class="me-2" width="140"
+                    height="60">
+            </a>
+            <a [routerLink]="['product/']" class="d-flex nav-link text-muted px-0 align-middle">
+                <h5 class="mt-1">Products</h5>
+            </a>
+            <a [routerLink]="['supermarket/']" class="d-flex nav-link text-muted align-middle px-0">
+                <h5 class="mt-1">Supermarket</h5>
+            </a>
+            <a [routerLink]="['contract/']" class="d-flex nav-link text-muted px-0 align-middle">
+                <h5 class="mt-1">Contract</h5>
+            </a>
+            <a [routerLink]="['company/']" class="d-flex nav-link text-muted px-0 align-middle">
+                <h5 class="mt-1">Company</h5>
+            </a>
+            <hr>
+            <a href="" (click)="logout()" class="d-flex nav-link text-danger px-0 align-middle">
+                <h5 class="mt-1">Logout</h5>
+            </a>
+            <hr class="text-white">
+        </div>
+    </div>
+</nav>

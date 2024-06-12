@@ -1,0 +1,11 @@
+.submit{
+    margin-top: 15px;
+    height: 50px;
+    border-radius: 15pt;
+    border-color: white;
+    color: white;
+    background-color: #25B8A7;
+}
+label{
+    color: white;
+}
