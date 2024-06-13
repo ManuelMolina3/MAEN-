@@ -1,0 +1,1063 @@
+{
+	"info": {
+		"_postman_id": "fb5833ca-69d8-4215-9213-9adf0188fea0",
+		"name": "MAEN",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30052623"
+	},
+	"item": [
+		{
+			"name": "No-auth",
+			"item": [
+				{
+					"name": "LOGIN",
+					"item": [
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"pepeillo\",\r\n    \"password\": \"123456789\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}auth/login",
+									"host": [
+										"{{BASE_URL}}auth"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "REGISTRER",
+					"item": [
+						{
+							"name": "RegistrerUser",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"pepeillo1\",\r\n    \"password\": \"123456789\",\r\n    \"verifyPassword\": \"123456789\",\r\n    \"email\": \"pepeillo1@gmail.com\",\r\n    \"name\": \"pepeillo uno\",\r\n    \"num_member_of_family\": 8,\r\n    \"salary\": 2000.00\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}auth/register",
+									"host": [
+										"{{BASE_URL}}auth"
+									],
+									"path": [
+										"register"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "WORKER",
+					"item": [
+						{
+							"name": "Supermarket",
+							"item": [
+								{
+									"name": "GetAll",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwNGQwNTk1ZS00NWQ1LTRmNjMtOGI1My0xZDc5ZTlkODRhNWQiLCJpYXQiOjE3MTgyMjMxNTQsImV4cCI6MTcxODMwOTU1NH0.fVWAe63SC4K8PLdCKqJhir4b7V7fi6aT_F_z6IlZJomIsxYBMHEG7f2YJ5s17OLPcAHXDcJ6MBrk5uLMbqiXZg",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}supermarket/",
+											"host": [
+												"{{BASE_URL}}supermarket"
+											],
+											"path": [
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "AddNewSupermarket",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwNGQwNTk1ZS00NWQ1LTRmNjMtOGI1My0xZDc5ZTlkODRhNWQiLCJpYXQiOjE3MTgyOTMwNjYsImV4cCI6MTcxODM3OTQ2Nn0.invxXCC-OGY20BIGDZfmujr1Jl-y49s0M4wwIVjzXvW4OmwG8ydPFwbpWUVNywjmZ_gUXhWui1-jGpqRD2yD4w",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\":\"pepito\",\r\n    \"logotype\":\"difhidfaiufiuiufaiu\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}supermarket/",
+											"host": [
+												"{{BASE_URL}}supermarket"
+											],
+											"path": [
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "EditSupermarket",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwNGQwNTk1ZS00NWQ1LTRmNjMtOGI1My0xZDc5ZTlkODRhNWQiLCJpYXQiOjE3MTc3NjA3NDAsImV4cCI6MTcxNzg0NzE0MH0.X6tIzuN-h8knmB5u9DBAC1lXRKRgQkLliRkFwLADfseSzsWoOefHNxIMoiEqlv2wy-FxN5w4VCVTTABIxOLeXQ",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"Cash-Fresh\",\r\n    \"logotype\": \"https://www.cashfresh.es/wp-content/uploads/2020/02/CASH-FRESH.jpg\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}supermarket/64c55bc0-9b75-46ae-b299-2cb7f8d1554f",
+											"host": [
+												"{{BASE_URL}}supermarket"
+											],
+											"path": [
+												"64c55bc0-9b75-46ae-b299-2cb7f8d1554f"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteSupermarket",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwNGQwNTk1ZS00NWQ1LTRmNjMtOGI1My0xZDc5ZTlkODRhNWQiLCJpYXQiOjE3MTc3NjkzMzMsImV4cCI6MTcxNzg1NTczM30.QNGmHYtVPDrZ_M8_NMMtwAjpvvcxVJ_9kDuZPc0G8ET7okcIu6FKTsvOgEoqTTihy7eJ26X3BZqLddImcDufMA",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}supermarket/78b05be9-d21c-465d-afe0-ff84041e2b01",
+											"host": [
+												"{{BASE_URL}}supermarket"
+											],
+											"path": [
+												"78b05be9-d21c-465d-afe0-ff84041e2b01"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": null,
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "findAll",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwNGQwNTk1ZS00NWQ1LTRmNjMtOGI1My0xZDc5ZTlkODRhNWQiLCJpYXQiOjE3MTgyNzgyMjIsImV4cCI6MTcxODM2NDYyMn0.ZJ6XyxWhKD_H2r9cPHcxM5cgCLpvey1pfGKIuIxbofjm-Tj0CqJep0425-H4QwYzGpQMBdXI5aWwyhfd7aOPeA",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}supermarket/all",
+											"host": [
+												"{{BASE_URL}}supermarket"
+											],
+											"path": [
+												"all"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Product",
+							"item": [
+								{
+									"name": "GetAll",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwNGQwNTk1ZS00NWQ1LTRmNjMtOGI1My0xZDc5ZTlkODRhNWQiLCJpYXQiOjE3MTgyNzgyMjIsImV4cCI6MTcxODM2NDYyMn0.ZJ6XyxWhKD_H2r9cPHcxM5cgCLpvey1pfGKIuIxbofjm-Tj0CqJep0425-H4QwYzGpQMBdXI5aWwyhfd7aOPeA",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}product/all?page=0",
+											"host": [
+												"{{BASE_URL}}product"
+											],
+											"path": [
+												"all"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "0"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "AddNewProduct",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwNGQwNTk1ZS00NWQ1LTRmNjMtOGI1My0xZDc5ZTlkODRhNWQiLCJpYXQiOjE3MTc3Njk4NTMsImV4cCI6MTcxNzg1NjI1M30.sTzyeuoHSIAsSHnDKNNg-jKsQbYV9sozncRzB5GwKsdUugqSCr-MpMEpey1c2vNjx42HbgxCnHvM2sJi1etvWg",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\":\"pepito\",\r\n    \"image\":\"saoifdsaoiuf\",\r\n    \"brand\":\"fdfdadfdsa\",\r\n    \"price\": 1.23,\r\n    \"priceKg\": 3.24,\r\n    \"taxes\": 1,\r\n    \"supermarketId\": \"5a810d7a-a62d-42a4-830c-905c78f1ce53\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}product/",
+											"host": [
+												"{{BASE_URL}}product"
+											],
+											"path": [
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "EditProduct",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwNGQwNTk1ZS00NWQ1LTRmNjMtOGI1My0xZDc5ZTlkODRhNWQiLCJpYXQiOjE3MTgyNzcxNDEsImV4cCI6MTcxODM2MzU0MX0.jHJ_sPSwYxw3i2TVKNjaoUGRHWJCAQMr5zCTHfCs03prTxrqxxK8uh34s6scpRaK-AuhRHvBeg_8oM-D09igHA",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\":\"paquito\",\r\n    \"image\":\"saoifdsaoiuf\",\r\n    \"brand\":\"fdfdadfdsa\",\r\n    \"price\": 1.23,\r\n    \"priceKg\": 3.24,\r\n    \"taxes\": 1\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}product/ba9f2f92-5c4d-49ce-8f01-ee073447bfb8",
+											"host": [
+												"{{BASE_URL}}product"
+											],
+											"path": [
+												"ba9f2f92-5c4d-49ce-8f01-ee073447bfb8"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": null,
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteProduct",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwNGQwNTk1ZS00NWQ1LTRmNjMtOGI1My0xZDc5ZTlkODRhNWQiLCJpYXQiOjE3MTc3Njk4NTMsImV4cCI6MTcxNzg1NjI1M30.sTzyeuoHSIAsSHnDKNNg-jKsQbYV9sozncRzB5GwKsdUugqSCr-MpMEpey1c2vNjx42HbgxCnHvM2sJi1etvWg",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}product/e0063b00-0570-4a00-ae5c-30623751a85e",
+											"host": [
+												"{{BASE_URL}}product"
+											],
+											"path": [
+												"e0063b00-0570-4a00-ae5c-30623751a85e"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": null,
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "ElectricityContract",
+							"item": [
+								{
+									"name": "GetAll",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwNGQwNTk1ZS00NWQ1LTRmNjMtOGI1My0xZDc5ZTlkODRhNWQiLCJpYXQiOjE3MTgyOTMwNjYsImV4cCI6MTcxODM3OTQ2Nn0.invxXCC-OGY20BIGDZfmujr1Jl-y49s0M4wwIVjzXvW4OmwG8ydPFwbpWUVNywjmZ_gUXhWui1-jGpqRD2yD4w",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}contract/",
+											"host": [
+												"{{BASE_URL}}contract"
+											],
+											"path": [
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "AddNewContract",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwNGQwNTk1ZS00NWQ1LTRmNjMtOGI1My0xZDc5ZTlkODRhNWQiLCJpYXQiOjE3MTc3NjA3NDAsImV4cCI6MTcxNzg0NzE0MH0.X6tIzuN-h8knmB5u9DBAC1lXRKRgQkLliRkFwLADfseSzsWoOefHNxIMoiEqlv2wy-FxN5w4VCVTTABIxOLeXQ",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"priceEnergy\": 0.00023,\r\n    \"discountEnergy\": 19,\r\n    \"pricePower\": 0.001,\r\n    \"priceEquipment\": 21.00,\r\n    \"taxes\": 12,\r\n    \"nameCompany\": \"Iberdrola\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}contract/",
+											"host": [
+												"{{BASE_URL}}contract"
+											],
+											"path": [
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "EditContract",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwNGQwNTk1ZS00NWQ1LTRmNjMtOGI1My0xZDc5ZTlkODRhNWQiLCJpYXQiOjE3MTc3NjA3NDAsImV4cCI6MTcxNzg0NzE0MH0.X6tIzuN-h8knmB5u9DBAC1lXRKRgQkLliRkFwLADfseSzsWoOefHNxIMoiEqlv2wy-FxN5w4VCVTTABIxOLeXQ",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"priceEnergy\": 0.00023,\r\n    \"discountEnergy\": 19,\r\n    \"pricePower\": 0.001,\r\n    \"priceEquipment\": 21.00,\r\n    \"taxes\": 12,\r\n    \"nameCompany\": \"Endesa\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}contract/cbf7a59b-2865-4e9a-b5fd-13a66491832b",
+											"host": [
+												"{{BASE_URL}}contract"
+											],
+											"path": [
+												"cbf7a59b-2865-4e9a-b5fd-13a66491832b"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": null,
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteContract",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}contract",
+											"host": [
+												"{{BASE_URL}}contract"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": null,
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "ElectricityCompany",
+							"item": [
+								{
+									"name": "GetAll",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwNGQwNTk1ZS00NWQ1LTRmNjMtOGI1My0xZDc5ZTlkODRhNWQiLCJpYXQiOjE3MTgyOTMwNjYsImV4cCI6MTcxODM3OTQ2Nn0.invxXCC-OGY20BIGDZfmujr1Jl-y49s0M4wwIVjzXvW4OmwG8ydPFwbpWUVNywjmZ_gUXhWui1-jGpqRD2yD4w",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}company/",
+											"host": [
+												"{{BASE_URL}}company"
+											],
+											"path": [
+												""
+											],
+											"query": [
+												{
+													"key": "",
+													"value": null,
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "AddNewCompany",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwNGQwNTk1ZS00NWQ1LTRmNjMtOGI1My0xZDc5ZTlkODRhNWQiLCJpYXQiOjE3MTc3NjA3NDAsImV4cCI6MTcxNzg0NzE0MH0.X6tIzuN-h8knmB5u9DBAC1lXRKRgQkLliRkFwLADfseSzsWoOefHNxIMoiEqlv2wy-FxN5w4VCVTTABIxOLeXQ",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\":\"pepito\",\r\n    \"logotype\":\"difhidfaiufiuiufaiu\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}company/",
+											"host": [
+												"{{BASE_URL}}company"
+											],
+											"path": [
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "EditCompany",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwNGQwNTk1ZS00NWQ1LTRmNjMtOGI1My0xZDc5ZTlkODRhNWQiLCJpYXQiOjE3MTc3NjA3NDAsImV4cCI6MTcxNzg0NzE0MH0.X6tIzuN-h8knmB5u9DBAC1lXRKRgQkLliRkFwLADfseSzsWoOefHNxIMoiEqlv2wy-FxN5w4VCVTTABIxOLeXQ",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"Cash-Fresh\",\r\n    \"logotype\": \"https://www.cashfresh.es/wp-content/uploads/2020/02/CASH-FRESH.jpg\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{BASE_URL}}company/d92057c4-ac58-4738-99e1-2e05e1596308",
+											"host": [
+												"{{BASE_URL}}company"
+											],
+											"path": [
+												"d92057c4-ac58-4738-99e1-2e05e1596308"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "DeleteCompany",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwNGQwNTk1ZS00NWQ1LTRmNjMtOGI1My0xZDc5ZTlkODRhNWQiLCJpYXQiOjE3MTc3NzA0MjUsImV4cCI6MTcxNzg1NjgyNX0.KeoYS04svrem7M2E_UsDWpxmIwLCqXomzcStiBhiHbdh45vvRO_9IXisqhKmGqEsDaUS53qAFv7Fq2oRoKnlGg",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}company/67b55d91-441f-4d6a-aad1-2e3ee3cd1dee",
+											"host": [
+												"{{BASE_URL}}company"
+											],
+											"path": [
+												"67b55d91-441f-4d6a-aad1-2e3ee3cd1dee"
+											],
+											"query": [
+												{
+													"key": "id",
+													"value": null,
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "FindAll",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwNGQwNTk1ZS00NWQ1LTRmNjMtOGI1My0xZDc5ZTlkODRhNWQiLCJpYXQiOjE3MTgyOTMwNjYsImV4cCI6MTcxODM3OTQ2Nn0.invxXCC-OGY20BIGDZfmujr1Jl-y49s0M4wwIVjzXvW4OmwG8ydPFwbpWUVNywjmZ_gUXhWui1-jGpqRD2yD4w",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}company/all",
+											"host": [
+												"{{BASE_URL}}company"
+											],
+											"path": [
+												"all"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "USER",
+					"item": [
+						{
+							"name": "SUPERMARKET",
+							"item": [
+								{
+									"name": "GetAllProducts",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwNGQwNTk1ZS00NWQ1LTRmNjMtOGI1My0xZDc5ZTlkODRhNWQiLCJpYXQiOjE3MTgyOTMwNjYsImV4cCI6MTcxODM3OTQ2Nn0.invxXCC-OGY20BIGDZfmujr1Jl-y49s0M4wwIVjzXvW4OmwG8ydPFwbpWUVNywjmZ_gUXhWui1-jGpqRD2yD4w",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}product/",
+											"host": [
+												"{{BASE_URL}}product"
+											],
+											"path": [
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "GetProductById",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwNGQwNTk1ZS00NWQ1LTRmNjMtOGI1My0xZDc5ZTlkODRhNWQiLCJpYXQiOjE3MDk0Nzk0OTcsImV4cCI6MTcwOTU2NTg5N30.h9rYW3YysQ6Ka_cJDOTv1Hb2JnvXfosgIyMv-ZFvA01Vs3_kcbC7BR5zrkAHceSG5F6pS7DR8nQlZV2EC4dRzQ",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}product/ba9f2f92-5c4d-49ce-8f01-ee073447bfb8",
+											"host": [
+												"{{BASE_URL}}product"
+											],
+											"path": [
+												"ba9f2f92-5c4d-49ce-8f01-ee073447bfb8"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "GetProductsByName",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwNGQwNTk1ZS00NWQ1LTRmNjMtOGI1My0xZDc5ZTlkODRhNWQiLCJpYXQiOjE3MDk0Nzk0OTcsImV4cCI6MTcwOTU2NTg5N30.h9rYW3YysQ6Ka_cJDOTv1Hb2JnvXfosgIyMv-ZFvA01Vs3_kcbC7BR5zrkAHceSG5F6pS7DR8nQlZV2EC4dRzQ",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}product/name/tomato",
+											"host": [
+												"{{BASE_URL}}product"
+											],
+											"path": [
+												"name",
+												"tomato"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "ELECTRICITYCOMPANY",
+							"item": [
+								{
+									"name": "GetAllDistinticContract",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwNGQwNTk1ZS00NWQ1LTRmNjMtOGI1My0xZDc5ZTlkODRhNWQiLCJpYXQiOjE3MDk2Mzg2NDcsImV4cCI6MTcwOTcyNTA0N30.fRrUUE605AUrtDDe5XA0mN36fkWlSaKDZWa2LudaPMs2hDLd6JX8RXU4c9iz6bOs7E08OjuwVUttSHvoFRU-wA",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}contract/",
+											"host": [
+												"{{BASE_URL}}contract"
+											],
+											"path": [
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "GetContractById",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwNGQwNTk1ZS00NWQ1LTRmNjMtOGI1My0xZDc5ZTlkODRhNWQiLCJpYXQiOjE3MDk1MzgxNDgsImV4cCI6MTcwOTYyNDU0OH0.DjqjMlj-u44j3TC1WnjGJQqgNGU841illafhK9x3CJ948r6HEnm02ORGgrn-J8mSnHiy4-R5sYQ-orsRi71slg",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}contract/4dd03371-7871-4f12-9555-e797c3d6e8fc",
+											"host": [
+												"{{BASE_URL}}contract"
+											],
+											"path": [
+												"4dd03371-7871-4f12-9555-e797c3d6e8fc"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "GetContractByCompany",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwNGQwNTk1ZS00NWQ1LTRmNjMtOGI1My0xZDc5ZTlkODRhNWQiLCJpYXQiOjE3MDk1MzgxNDgsImV4cCI6MTcwOTYyNDU0OH0.DjqjMlj-u44j3TC1WnjGJQqgNGU841illafhK9x3CJ948r6HEnm02ORGgrn-J8mSnHiy4-R5sYQ-orsRi71slg",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BASE_URL}}contract/company/d92057c4-ac58-4738-99e1-2e05e1596308",
+											"host": [
+												"{{BASE_URL}}contract"
+											],
+											"path": [
+												"company",
+												"d92057c4-ac58-4738-99e1-2e05e1596308"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "PERFILE",
+							"item": [
+								{
+									"name": "GET",
+									"item": [
+										{
+											"name": "GetMyShoppingCart",
+											"request": {
+												"method": "GET",
+												"header": []
+											},
+											"response": []
+										},
+										{
+											"name": "GetMyShoppingCartDetails",
+											"request": {
+												"method": "GET",
+												"header": []
+											},
+											"response": []
+										},
+										{
+											"name": "GetMyElectricityContract",
+											"request": {
+												"method": "GET",
+												"header": []
+											},
+											"response": []
+										},
+										{
+											"name": "GetMyElectricityContractDetails",
+											"request": {
+												"method": "GET",
+												"header": []
+											},
+											"response": []
+										},
+										{
+											"name": "GetMyPerfile",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwNGQwNTk1ZS00NWQ1LTRmNjMtOGI1My0xZDc5ZTlkODRhNWQiLCJpYXQiOjE3MDk3MjY1NTEsImV4cCI6MTcwOTgxMjk1MX0.wYSLJzfvK9DO3cDPQXiXy7JayLpjnl5s5a96nW0piSrHzfJUXkGHZZ-C_lbwhN3T_vxbbDBZNa1Hp97H2VRRhw",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{BASE_URL}}perfile/",
+													"host": [
+														"{{BASE_URL}}perfile"
+													],
+													"path": [
+														""
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "POST",
+									"item": [
+										{
+											"name": "AddNewElectricityBill",
+											"request": {
+												"method": "POST",
+												"header": []
+											},
+											"response": []
+										},
+										{
+											"name": "AddNewShoppingCart",
+											"request": {
+												"method": "POST",
+												"header": []
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "PUT",
+									"item": [
+										{
+											"name": "AddProductToShoppingCart",
+											"request": {
+												"method": "PUT",
+												"header": []
+											},
+											"response": []
+										},
+										{
+											"name": "EditElectricityBill",
+											"request": {
+												"method": "PUT",
+												"header": []
+											},
+											"response": []
+										},
+										{
+											"name": "EditElectricityContract",
+											"request": {
+												"method": "PUT",
+												"header": []
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "DELETE",
+									"item": [
+										{
+											"name": "DeleteProductOfShoppingCart",
+											"request": {
+												"method": "DELETE",
+												"header": []
+											},
+											"response": []
+										},
+										{
+											"name": "DeleteElectricityBill",
+											"request": {
+												"method": "DELETE",
+												"header": []
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:8080/",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "refresh_token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
