@@ -20,6 +20,8 @@ export class SupermarketPageComponent implements OnInit{
   logotype: string = '';
   nameErr: string = '';
   logotypeErr: string = '';
+  showModal: boolean = false;
+  editingSupermarket: Supermarket | null =null;
   constructor(private supermarketService: SupermarketService, private modalService: NgbModal){
 
   }
@@ -66,5 +68,33 @@ export class SupermarketPageComponent implements OnInit{
         }
       },
   });
+  }
+  editSupermarket(): void{
+    if(this.editingSupermarket){
+      const updateSupermarkert : AddSupermarketDTO = {
+        name : this.editingSupermarket.name,
+        logotype : this.editingSupermarket.logotype
+      };
+      this.supermarketService.editSupermarket(this.editingSupermarket.id, updateSupermarkert).subscribe(
+        editedSupermarket =>{
+          const supermaketIndex = this.supermarketList.findIndex(c => c.id === editedSupermarket.id);
+          if(supermaketIndex !== -1){
+            this.supermarketList[supermaketIndex] = editedSupermarket;
+          }
+          this.closeModal();
+        },
+        error =>{
+          console.error('There was an error!', error);
+        }
+      )
+    }
+  }
+  editThisSupermarket(supermarketEdit: Supermarket): void{
+    this.editingSupermarket = {...supermarketEdit};
+    this.showModal= true;
+  }
+  closeModal(): void {
+    this.showModal = false;
+    this.editingSupermarket = null;
   }
 }

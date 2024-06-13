@@ -6,13 +6,14 @@ export interface ProductResponse {
     first:         boolean;
     last:          boolean;
 }
+
 export interface Product {
     id:               string;
     productName:      string;
     productImage:     string;
     productBrand:     string;
     price:            number;
+    taxes:            number;
     superMarketName:  string;
     superMarketImage: string;
-    category:         string;
 }

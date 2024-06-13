@@ -12,7 +12,6 @@ public record AddProductDTO(
         double price,
         double priceKg,
         int taxes,
-        Category category,
         UUID supermarketId
 ) {
 }

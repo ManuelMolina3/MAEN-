@@ -71,7 +71,6 @@ public class ProductService {
         p.setPrice(nuevo.price());
         p.setPriceKg(nuevo.priceKg());
         p.setTaxes(nuevo.taxes());
-        p.setCategory(nuevo.category());
 
         Optional<SuperMarket> sm = superRepository.findById(nuevo.supermarketId());
 
@@ -109,9 +108,7 @@ public class ProductService {
             edit.setImage(editP.image());
             edit.setBrand(editP.brand());
             edit.setPrice(editP.price());
-            edit.setPriceKg(editP.priceKg());
             edit.setTaxes(editP.taxes());
-            edit.setCategory(editP.category());
 
 
             repository.save(edit);

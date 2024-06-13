@@ -8,7 +8,7 @@
             <th scope="col">Price</th>
             <th scope="col">Supermarket name</th>
             <th scope="col">Supermarket image</th>
-            <th scope="col">Category</th>
+            <th scope="col">Taxes</th>
             <th scope="col">    
                 <button class="btn btn-primary fs-5" (click)="open(content)">Add</button>
             </th>
@@ -38,10 +38,10 @@
                     {{product.superMarketImage}}
                 </td>
                 <td>
-                    {{product.category}}
+                    {{product.taxes}}
                 </td>
                 <td>
-                    <button icon="pi pi-pen-to-square"></button>
+                    <button icon="pi pi-pen-to-square" (click)="editThisProduct(product)"></button>
                 </td>
                 <td>
                     <button icon="pi pi-trash"></button>
@@ -208,4 +208,33 @@
       </button>
     </div>
   </ng-template>
+  <div *ngIf="showModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+    <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-lg">
+      <h2 class="text-2xl font-semibold mb-4">Edit product</h2>
+      <div class="mb-3">
+        <label>Name</label>
+        <input type="text" [(ngModel)]="editingProduct!.productName">
+      </div>
+      <div class="mb-3">
+        <label class="block text-sm font-medium text-gray-700">Image</label>
+        <input type="text" [(ngModel)]="editingProduct!.productImage">
+      </div>
+      <div class="mb-3">
+        <label class="block text-sm font-medium text-gray-700">Brand</label>
+        <input type="text" [(ngModel)]="editingProduct!.productBrand">
+      </div>
+      <div class="mb-3">
+        <label class="block text-sm font-medium text-gray-700">Price</label>
+        <input type="number" [(ngModel)]="editingProduct!.price">
+      </div>
+      <div class="mb-3">
+        <label class="block text-sm font-medium text-gray-700">Taxes</label>
+        <input type="number" [(ngModel)]="editingProduct!.taxes">
+      </div>
+      <div class="flex justify-end">
+        <button (click)="closeModal()" class="mr-4 px-4 py-2 bg-gray-300 rounded-md">Cancel</button>
+        <button (click)="editProduct()" class="px-4 py-2 bg-blue-600 text-white rounded-md">Save</button>
+      </div>
+    </div>
+  </div>
   

@@ -1,9 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable} from 'rxjs';
+import { Observable, catchError, throwError} from 'rxjs';
 import { Product, ProductResponse } from '../models/product/product-response.interface';
 import { environment } from '../../environments/environment.development';
-import { AddProductDTO } from '../models/product/add-product-dto.interface';
+import { AddProductDTO, EditProduct } from '../models/product/add-product-dto.interface';
 
 
 @Injectable({
@@ -19,7 +19,9 @@ export class ProductService {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${localStorage.getItem(this.authTokenKey)}`
       })
-    })
+    }).pipe(
+      catchError(this.handleError)
+    )
   
   }
   createNewProduct(createProduct: AddProductDTO): Observable<Product>{
@@ -31,14 +33,41 @@ export class ProductService {
         price: createProduct.price,
         priceKg: createProduct.priceKg,
         taxes: createProduct.taxes,
-        category: createProduct.category,
         supermarketId: createProduct.supermarketId,
       },
       {
-        headers: {
+        headers: new HttpHeaders({
           accept: 'application/json',
           'Authorization': `Bearer ${localStorage.getItem(this.authTokenKey)}`
-        }
+        })
+      }).pipe(
+        catchError(this.handleError)
+      )
+  }
+  editProduct(id: string, productEdit: EditProduct): Observable<Product>{
+    return this.http.put<Product>(`${environment.apiBaseUrl}/product/${id}`,{
+      name: productEdit.name,
+      image: productEdit.image,
+      brand: productEdit.brand,
+      price: productEdit.price,
+      taxes: productEdit.taxes
+    },{
+      headers: new HttpHeaders({
+        accept: 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem(this.authTokenKey)}`
       })
+    }).pipe(
+      catchError(this.handleError)
+    );
+  }
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      console.error('An error occurred:', error.error.message);
+    } else {
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
+    }
+    return throwError('Something bad happened; please try again later.');
   }
 }
