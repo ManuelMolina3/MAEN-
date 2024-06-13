@@ -1,11 +1,15 @@
-.submit{
-    margin-top: 15px;
-    height: 50px;
-    border-radius: 15pt;
-    border-color: white;
-    color: white;
-    background-color: #25B8A7;
-}
-label{
-    color: white;
-}
+body {
+    background-color: #fafafa;
+  }
+  
+  .card {
+    max-width: 400px;
+    border: none;
+    border-radius: 1rem;
+  }
+  
+  .img-fluid {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }

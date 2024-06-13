@@ -1,32 +1,39 @@
-nav,
-header {
-    background-color: #25B8A7;
-}
-
-.sidebar {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
+  #sidebar {
+    background-color: #25B8A7; /* Color teal */
+    border-radius: 1rem;
     width: 240px;
-    z-index: 600;
-}
-
-.sidebar .active {
-    border-radius: 5px;
-    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
-}
-
-.sidebar-sticky {
-    position: relative;
-    top: 0;
-    height: calc(100vh - 48px);
-    padding-top: 0.5rem;
-    overflow-x: hidden;
+    position: fixed;
+    height: 100vh;
     overflow-y: auto;
-}
-
-ng-template>a {
-    background-color: #ffff;
-}
+    padding-top: 20px;
+  }
+  
+  .nav-link {
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    transition: background-color 0.3s;
+  }
+  
+  .nav-link.active {
+    background-color: #138a74; /* Color más oscuro cuando está activo */
+  }
+  
+  .nav-link:hover {
+    background-color: #138a74; /* Color más oscuro al pasar el ratón */
+  }
+  
+  img.img-fluid {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  h2, p {
+    color: #ffffff;
+    text-align: center;
+  }
+  
