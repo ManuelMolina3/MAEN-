@@ -1,0 +1,17 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .d-flex {
+    display: flex;
+  }
+  
+  .flex-grow-1 {
+    flex-grow: 1;
+  }
+  
+  .container {
+    padding: 15px;
+  }

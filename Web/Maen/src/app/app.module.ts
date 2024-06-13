@@ -7,12 +7,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginPageComponent } from './ui/login-page/login-page.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { ProductPageComponent } from './ui/product-page/product-page.component';
 import { SupermarketPageComponent } from './ui/supermarket-page/supermarket-page.component';
 import { CompanyPageComponent } from './ui/company-page/company-page.component';
 import { ContractPageComponent } from './ui/contract-page/contract-page.component';
+import { ProductsPageComponent } from './main/products-page/products-page.component';
+import { SupermarketsPageComponent } from './main/supermarkets-page/supermarkets-page.component';
+import { ContractsPageComponent } from './main/contracts-page/contracts-page.component';
+import { CompaniesPageComponent } from './main/companies-page/companies-page.component';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +27,11 @@ import { ContractPageComponent } from './ui/contract-page/contract-page.componen
     ProductPageComponent,
     SupermarketPageComponent,
     CompanyPageComponent,
-    ContractPageComponent
+    ContractPageComponent,
+    ProductsPageComponent,
+    SupermarketsPageComponent,
+    ContractsPageComponent,
+    CompaniesPageComponent
   ],
   imports: [
     BrowserModule,
@@ -35,4 +44,5 @@ import { ContractPageComponent } from './ui/contract-page/contract-page.componen
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+ }

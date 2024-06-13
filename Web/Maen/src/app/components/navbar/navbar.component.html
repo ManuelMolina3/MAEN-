@@ -1,28 +1,24 @@
-<nav id="sidebar" class="collapse d-lg-block sidebar">
+<nav id="sidebar" class="collapse d-lg-block sidebar bg-teal text-white">
     <div class="position-sticky">
-        <div class="list-group list-group-flush mx-3 mt-4">
-            <a [routerLink]="['product/']"
-                class="d-flex align-items-center pb-5 mb-md-0 me-md-auto text-black text-decoration-none">
-                <img src="../../../assets/logoAppIntro.png" alt="Logo de la aplicación" class="me-2" width="140"
-                    height="60">
-            </a>
-            <a [routerLink]="['product/']" class="d-flex nav-link text-muted px-0 align-middle">
-                <h5 class="mt-1">Products</h5>
-            </a>
-            <a [routerLink]="['supermarket/']" class="d-flex nav-link text-muted align-middle px-0">
-                <h5 class="mt-1">Supermarket</h5>
-            </a>
-            <a [routerLink]="['contract/']" class="d-flex nav-link text-muted px-0 align-middle">
-                <h5 class="mt-1">Contract</h5>
-            </a>
-            <a [routerLink]="['company/']" class="d-flex nav-link text-muted px-0 align-middle">
-                <h5 class="mt-1">Company</h5>
-            </a>
-            <hr>
-            <a href="" (click)="logout()" class="d-flex nav-link text-danger px-0 align-middle">
-                <h5 class="mt-1">Logout</h5>
-            </a>
-            <hr class="text-white">
+      <div class="list-group list-group-flush mx-3 text-center">
+        <div class="mb-4">
+          <img src="../../../assets/logoAppFirst.png" alt="Logo de la aplicación" class="img-fluid" style="width: 250px; height: auto;">
         </div>
+        <a routerLink="/supermarket" routerLinkActive="active" class="nav-link text-white">
+          <h5 class="mt-1">Supermarket</h5>
+        </a>
+        <a routerLink="/product" routerLinkActive="active" class="nav-link text-white">
+          <h5 class="mt-1">Product</h5>
+        </a>
+        <a routerLink="/company" routerLinkActive="active" class="nav-link text-white">
+          <h5 class="mt-1">Electricity Company</h5>
+        </a>
+        <a routerLink="/contract" routerLinkActive="active" class="nav-link text-white">
+          <h5 class="mt-1">Electricity Contract</h5>
+        </a>
+        <a href="" (click)="logout()" class="nav-link text-danger">
+          <h5 class="mt-1">Logout</h5>
+        </a>
+      </div>
     </div>
-</nav>
+  </nav>

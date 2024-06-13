@@ -1,0 +1,63 @@
+.container {
+    margin: 20px;
+  }
+  
+  h2 {
+    color: #25B8A7;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .table th {
+    background-color: #25B8A7;
+    color: white;
+    text-align: center;
+  }
+  
+  .table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .table tr:hover {
+    background-color: #ddd;
+  }
+  
+  .logotype-img {
+    width: 50px;
+    height: auto;
+  }
+  
+  .btn-action {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btn-action svg {
+    fill: #38c;
+    transition: fill 0.3s;
+  }
+  
+  .btn-action:hover svg {
+    fill: #ff0000;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  .table img {
+    max-height: 50px;
+    max-width: 50px;
+}
