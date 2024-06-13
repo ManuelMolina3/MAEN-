@@ -60,6 +60,15 @@ export class ProductService {
       catchError(this.handleError)
     );
   }
+  deleteProduct(id: String): Observable<any> {
+    return this.http.delete<any>(`${environment.apiBaseUrl}/product/${id}`, {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem(this.authTokenKey)}`
+      })
+    }).pipe(
+      catchError(this.handleError)
+    );
+  }
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);

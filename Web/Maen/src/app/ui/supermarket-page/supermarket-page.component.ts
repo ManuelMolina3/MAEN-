@@ -22,6 +22,8 @@ export class SupermarketPageComponent implements OnInit{
   logotypeErr: string = '';
   showModal: boolean = false;
   editingSupermarket: Supermarket | null =null;
+  deleteSupermarket: Supermarket | null =null;
+  showDeleteModal: boolean = false;
   constructor(private supermarketService: SupermarketService, private modalService: NgbModal){
 
   }
@@ -90,6 +92,7 @@ export class SupermarketPageComponent implements OnInit{
     }
   }
   editThisSupermarket(supermarketEdit: Supermarket): void{
+    console.log(this.editingSupermarket?.id);
     this.editingSupermarket = {...supermarketEdit};
     this.showModal= true;
   }
@@ -97,4 +100,25 @@ export class SupermarketPageComponent implements OnInit{
     this.showModal = false;
     this.editingSupermarket = null;
   }
+  deleteSuper(){
+    if(this.deleteSupermarket){
+      this.supermarketService.deleteSupermarket(this.deleteSupermarket.id).subscribe(
+        ()=>{
+        this.supermarketList = this.supermarketList.filter(c => c.id !== this.deleteSupermarket!.id);
+        this.showDeleteModal= false;
+        },
+        error =>{
+          console.error('There was an error!', error);
+        }
+      )
+    }
+  }
+  deleteThisSupermarket(superDelete: Supermarket): void{
+    this.deleteSupermarket = superDelete;
+    this.showDeleteModal = true;
+  }
+  cancelDeleteModal(){
+    this.showDeleteModal = false;
+  }
+
 }

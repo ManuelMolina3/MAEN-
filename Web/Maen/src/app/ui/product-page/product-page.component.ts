@@ -34,6 +34,8 @@ export class ProductPageComponent implements OnInit{
   idSuper: string = '';
   showModal: boolean = false;
   editingProduct: Product | null =null;
+  deleteProduct: Product | null =null;
+  showDeleteModal: boolean = false;
   constructor(private productService: ProductService, private supermarketSevice: SupermarketService, private modalService: NgbModal){
 
   }
@@ -141,6 +143,26 @@ export class ProductPageComponent implements OnInit{
   closeModal(): void {
     this.showModal = false;
     this.editingProduct = null;
+  }
+  deleteProd(){
+    if(this.deleteProduct){
+      this.productService.deleteProduct(this.deleteProduct.id).subscribe(
+        () =>{
+          this.productList = this.productList.filter(c => c.id !== this.deleteProduct!.id);
+          this.showDeleteModal= false;
+        },
+        error =>{
+          console.error('There was an error!', error);
+        }
+      )
+    }
+  }
+  deleteThisproduct(proDelete: Product): void{
+    this.deleteProduct = proDelete;
+    this.showDeleteModal = true;
+  }
+  cancelDeleteModal(){
+    this.showDeleteModal = false;
   }
   
 }
