@@ -15,10 +15,9 @@ public record GetProductDTO(
         String productBrand,
 
         double price,
-
+        double taxes,
         String superMarketName,
-        String superMarketImage,
-        Category category
+        String superMarketImage
 
 
 ) {
@@ -29,6 +28,7 @@ public record GetProductDTO(
                 .productImage(p.getImage())
                 .productBrand(p.getBrand())
                 .price(p.getPrice())
+                .taxes(p.getTaxes())
                 .superMarketName(p.getSuperMarket().getName())
                 .superMarketImage(p.getSuperMarket().getLogotype())
                 .build();
@@ -40,8 +40,8 @@ public record GetProductDTO(
                 .productImage(p.getImage())
                 .productBrand(p.getBrand())
                 .price(p.getPrice())
+                .taxes(p.getTaxes())
                 .superMarketName(p.getSuperMarket().getName())
-                .category(p.getCategory())
                 .build();
     }
 

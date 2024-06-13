@@ -1,9 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Contract, ContractResponse } from '../models/contract/contract-response.interface';
-import { AddContractDTO } from '../models/contract/add-contract-dto.interface';
+import { AddContractDTO, EditContractDTO } from '../models/contract/add-contract-dto.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,9 @@ export class ContractService {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${localStorage.getItem(this.authTokenKey)}`
       })
-    })
+    }).pipe(
+      catchError(this.handleError)
+    );
   }
 
   createNewContract(createContract: AddContractDTO): Observable<Contract>{
@@ -31,10 +33,38 @@ export class ContractService {
         nameCompany:    createContract.nameCompany,
       },
       {
-        headers: {
+        headers: new HttpHeaders({
           accept: 'application/json',
           'Authorization': `Bearer ${localStorage.getItem(this.authTokenKey)}`
-        }
+        })
+      }).pipe(
+        catchError(this.handleError)
+      );
+  }
+  editContract(id: string, contractEdit: EditContractDTO): Observable<Contract>{
+    return this.http.put<Contract>(`${environment.apiBaseUrl}/contract/${id}`,{
+      priceEnergy: contractEdit.priceEnergy,
+      discountEnergy: contractEdit.discountEnergy,
+      pricePower: contractEdit.pricePower,
+      priceEquipment: contractEdit.priceEquipment,
+      taxes: contractEdit.taxes,
+    },{
+      headers: new HttpHeaders({
+        accept: 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem(this.authTokenKey)}`
       })
+    }).pipe(
+      catchError(this.handleError)
+    );
+  }
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      console.error('An error occurred:', error.error.message);
+    } else {
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
+    }
+    return throwError('Something bad happened; please try again later.');
   }
 }

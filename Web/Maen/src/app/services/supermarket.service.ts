@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { Supermarket, SupermarketResponse } from '../models/supermarket/supermarket-response.interface';
 import { environment } from '../../environments/environment';
 import { AddSupermarketDTO } from '../models/supermarket/add-supermarket-dto.interface';
@@ -27,17 +27,44 @@ export class SupermarketService {
         logotype: createSupermarket.logotype
       },
       {
-        headers: {
+        headers: new HttpHeaders({
           accept: 'application/json',
           'Authorization': `Bearer ${localStorage.getItem(this.authTokenKey)}`
-        }
-      })
+        })
+      }).pipe(
+        catchError(this.handleError)
+      );
   }
   findAll(): Observable<Supermarket[]>{
     return this.http.get<Supermarket[]>(`${environment.apiBaseUrl}/supermarket/all`,{
       headers: new HttpHeaders({
         'Authorization': `Bearer ${localStorage.getItem(this.authTokenKey)}`
       })
-    });
+    }).pipe(
+      catchError(this.handleError)
+    );
+  }
+  editSupermarket(id: string, superEdit: AddSupermarketDTO): Observable<Supermarket>{
+    return this.http.put<Supermarket>(`${environment.apiBaseUrl}/supermarket/${id}`,{
+      name: superEdit.name,
+      logotype: superEdit.logotype
+    },{
+      headers: new HttpHeaders({
+        accept: 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem(this.authTokenKey)}`
+      })
+    }).pipe(
+      catchError(this.handleError)
+    );
+  }
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      console.error('An error occurred:', error.error.message);
+    } else {
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
+    }
+    return throwError('Something bad happened; please try again later.');
   }
 }

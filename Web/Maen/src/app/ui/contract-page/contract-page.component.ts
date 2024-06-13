@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef, inject } from '@angular/core';
 import { Contract } from '../../models/contract/contract-response.interface';
 import { ContractService } from '../../services/contract.service';
 import { ActivatedRoute } from '@angular/router';
-import { AddContractDTO } from '../../models/contract/add-contract-dto.interface';
+import { AddContractDTO, EditContractDTO } from '../../models/contract/add-contract-dto.interface';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Company } from '../../models/company/company-response.interface';
 import { CompanyService } from '../../services/company.service';
@@ -32,6 +32,8 @@ export class ContractPageComponent implements OnInit{
   nameCompanyErr: string = '';
   companyList!: Company[];
   idCompany: string = '';
+  showModal: boolean = false;
+  editingContract: Contract | null =null;
   constructor(private contractService: ContractService, private modalService: NgbModal, private companyService: CompanyService){
 
   }
@@ -104,6 +106,38 @@ saveCreatedContract(){
       }
     },
   });
+}
+editContract(): void{
+  if(this.editingContract){
+    const updateContract : EditContractDTO = {
+      priceEnergy: this.editingContract.priceEnergy,
+      discountEnergy: this.editingContract.discountEnergy,
+      pricePower: this.editingContract.pricePower,
+      priceEquipment: this.editingContract.priceEquipment,
+      taxes: this.editingContract.taxes
+
+    };
+    this.contractService.editContract(this.editingContract.id, updateContract).subscribe(
+      editedContract =>{
+        const contractIndex = this.contractList.findIndex(p => p.id === editedContract.id);
+        if(contractIndex !== -1){
+          this.contractList[contractIndex] = editedContract;
+        }
+        this.closeModal();
+      },
+      error =>{
+        console.error('There was an error!', error);
+      }
+    )
+  }
+}
+editThisContract(contractEdit: Contract): void{
+  this.editingContract = {...contractEdit};
+  this.showModal= true;
+}
+closeModal(): void {
+  this.showModal = false;
+  this.editingContract = null;
 }
 
 }

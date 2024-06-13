@@ -20,6 +20,8 @@ export class CompanyPageComponent implements OnInit{
   logotype: string = '';
   nameErr: string = '';
   logotypeErr: string = '';
+  showModal: boolean = false;
+  editingCompany: Company | null =null;
   constructor(private companyService: CompanyService, private modalService: NgbModal){
 
   }
@@ -67,5 +69,34 @@ export class CompanyPageComponent implements OnInit{
       },
   });
   }
+  editCompany(): void{
+    if(this.editingCompany){
+      const updateCompany : AddCompanyDTO = {
+        name : this.editingCompany.name,
+        logotype : this.editingCompany.urlImage
+      };
+      this.companyService.editCompany(this.editingCompany.id, updateCompany).subscribe(
+        editedCompany =>{
+          const companyIndex = this.companyList.findIndex(c => c.id === editedCompany.id);
+          if(companyIndex !== -1){
+            this.companyList[companyIndex] = editedCompany;
+          }
+          this.closeModal();
+        },
+        error =>{
+          console.error('There was an error!', error);
+        }
+      )
+    }
+  }
+  editThisCompany(companyEdit: Company): void{
+    this.editingCompany = {...companyEdit};
+    this.showModal= true;
+  }
+  closeModal(): void {
+    this.showModal = false;
+    this.editingCompany = null;
+  }
+
 
 }
