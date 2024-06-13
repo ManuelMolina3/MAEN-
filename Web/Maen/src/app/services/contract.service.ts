@@ -41,6 +41,15 @@ export class ContractService {
         catchError(this.handleError)
       );
   }
+  deleteContract(id: String): Observable<any> {
+    return this.http.delete<any>(`${environment.apiBaseUrl}/contract/${id}`, {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${localStorage.getItem(this.authTokenKey)}`
+      })
+    }).pipe(
+      catchError(this.handleError)
+    );
+  }
   editContract(id: string, contractEdit: EditContractDTO): Observable<Contract>{
     return this.http.put<Contract>(`${environment.apiBaseUrl}/contract/${id}`,{
       priceEnergy: contractEdit.priceEnergy,

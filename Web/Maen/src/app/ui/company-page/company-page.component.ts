@@ -22,6 +22,8 @@ export class CompanyPageComponent implements OnInit{
   logotypeErr: string = '';
   showModal: boolean = false;
   editingCompany: Company | null =null;
+  deleteCompany: Company | null =null;
+  showDeleteModal: boolean = false;
   constructor(private companyService: CompanyService, private modalService: NgbModal){
 
   }
@@ -96,6 +98,26 @@ export class CompanyPageComponent implements OnInit{
   closeModal(): void {
     this.showModal = false;
     this.editingCompany = null;
+  }
+  deleteCom(){
+    if(this.deleteCompany){
+      this.companyService.deleteCompany(this.deleteCompany.id).subscribe(
+        () =>{
+          this.companyList = this.companyList.filter(c => c.id !== this.deleteCompany!.id);
+          this.showDeleteModal= false;
+        },
+        error =>{
+          console.error('There was an error!', error);
+        }
+      )
+    }
+  }
+  deleteThisCompany(comDelete: Company): void{
+    this.deleteCompany = comDelete;
+    this.showDeleteModal = true;
+  }
+  cancelDeleteModal(){
+    this.showDeleteModal = false;
   }
 
 

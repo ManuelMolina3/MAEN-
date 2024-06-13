@@ -34,6 +34,8 @@ export class ContractPageComponent implements OnInit{
   idCompany: string = '';
   showModal: boolean = false;
   editingContract: Contract | null =null;
+  deleteContract: Contract | null =null;
+  showDeleteModal: boolean = false;
   constructor(private contractService: ContractService, private modalService: NgbModal, private companyService: CompanyService){
 
   }
@@ -139,5 +141,26 @@ closeModal(): void {
   this.showModal = false;
   this.editingContract = null;
 }
+deleteCon(){
+  if(this.deleteContract){
+    this.contractService.deleteContract(this.deleteContract.id).subscribe(
+      () =>{
+        this.contractList = this.contractList.filter(c => c.id === this.deleteContract!.id);
+        this.showDeleteModal= false;
+      },
+      error =>{
+        console.error('There was an error!', error);
+      }
+    )
+  }
+}
+deleteThisContract(contDelete: Contract): void{
+  this.deleteContract = contDelete;
+  this.showDeleteModal = true;
+}
+cancelDeleteModal(){
+  this.showDeleteModal = false;
+}
+
 
 }
